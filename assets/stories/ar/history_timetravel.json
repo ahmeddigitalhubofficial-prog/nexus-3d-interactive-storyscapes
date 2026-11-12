@@ -1,0 +1,239 @@
+{
+  "story_title": "حارس بوابة الزمن",
+  "start_node_id": "intro",
+  "nodes": {
+    "intro": {
+      "id": "intro",
+      "text": "فتحت عينيك بصعوبة ولقيت نفسك نايم على رملة ناعمة تحت شمس حامية جداً. بصيت حواليك واتفاجئت: أهرامات الجيزة قدامك ولسه بتتبني! آلة الزمن بتاعتك طالع منها دخان كتير وشكل بلورة الطاقة الشمسية اتكسرت. محتاج بلورة بديل عشان ترجع للقرن الواحد وعشرين.",
+      "image_path": "assets/images/history_pyramids.webp",
+      "audio_path": "assets/audio/history_ambient.mp3",
+      "sfx_path": "assets/audio/spark_fail.mp3",
+      "effect": "shake",
+      "choices": [
+        {
+          "text": "روح ناحية القرية الفرعونية القريبة جنب النيل",
+          "target_node_id": "village",
+          "condition": null,
+          "state_updates": null
+        },
+        {
+          "text": "اتسحب براحة لموقع بناء الهرم الأكبر",
+          "target_node_id": "pyramid_site",
+          "condition": null,
+          "state_updates": [
+            { "variable": "fear", "operation": "add", "value": 10 }
+          ]
+        }
+      ]
+    },
+    "village": {
+      "id": "village",
+      "text": "دخلت القرية الفرعونية الزحمة. بص لك كاهن معبد عجوز نظراته حادة. قرب منك وهمس: 'هدومك غريبة ووشك باين عليه إنه من زمن تاني بعيد قوي... هو إنت مبعوث من الآلهة؟' باين عليه ذكي وممكن يساعدك.",
+      "image_path": "assets/images/history_village.webp",
+      "audio_path": "assets/audio/history_ambient.mp3",
+      "sfx_path": null,
+      "effect": null,
+      "choices": [
+        {
+          "text": "قوله الحقيقة وإنك مسافر عبر الزمن",
+          "target_node_id": "tell_truth",
+          "condition": null,
+          "state_updates": [
+            { "variable": "fear", "operation": "add", "value": 15 }
+          ]
+        },
+        {
+          "text": "اعمل نفسك تاجر جاي من بلاد بعيدة وعايز تبيع وتشتري",
+          "target_node_id": "pretend_merchant",
+          "condition": null,
+          "state_updates": null
+        }
+      ]
+    },
+    "tell_truth": {
+      "id": "tell_truth",
+      "text": "كتبنا القديمة اتكلمت عن حراس الزمن. لو إنت صادق، حل الفزورة دي: إيه الحاجة اللي بتتولد الصبح شاب وبالليل عجوز وبتدي الحياة للكل؟",
+      "image_path": "assets/images/history_priest.webp",
+      "audio_path": "assets/audio/history_tension.mp3",
+      "sfx_path": null,
+      "effect": null,
+      "choices": [
+        {
+          "text": "الإجابة هي: الشمس (رع)",
+          "target_node_id": "riddle_solved",
+          "condition": null,
+          "state_updates": null
+        },
+        {
+          "text": "الإجابة هي: الإنسان",
+          "target_node_id": "riddle_failed",
+          "condition": null,
+          "state_updates": [
+            { "variable": "health", "operation": "subtract", "value": 10 }
+          ]
+        }
+      ]
+    },
+    "pretend_merchant": {
+      "id": "pretend_merchant",
+      "text": "تجارنا مبيبلبسوش هدوم بتلمع كدة، ومبيشيلوش الساعات اللي بتكتك بضربات غريبة. إنت مخبي حاجة، وأنا مش هثق فيك! ومشي وسابك لوحدك في السوق من غير مساعدة.",
+      "image_path": "assets/images/history_market.webp",
+      "audio_path": "assets/audio/history_ambient.mp3",
+      "sfx_path": "assets/audio/crowd_disapprove.mp3",
+      "effect": null,
+      "choices": [
+        {
+          "text": "روح لموقع بناء الهرم عشان تدور على حل تاني",
+          "target_node_id": "pyramid_site",
+          "condition": null,
+          "state_updates": null
+        }
+      ]
+    },
+    "riddle_solved": {
+      "id": "riddle_solved",
+      "text": "بالظبط! هي عين رع، الشمس الحامية! إنت فعلاً حارس بوابة الزمن. خدك لسرداب المعبد السري وأداك جعران دهب مقدس عليه بلورة الشمس الزرقا النادرة!",
+      "image_path": "assets/images/history_temple.webp",
+      "audio_path": "assets/audio/history_ambient.mp3",
+      "sfx_path": "assets/audio/angelic_choir.mp3",
+      "effect": null,
+      "codex_updates": [
+        { "entry_id": "blue_crystal_lore", "unlocked": true }
+      ],
+      "choices": [
+        {
+          "text": "خد بلورة الشمس وارجع لآلة الزمن بتاعتك بسرعة",
+          "target_node_id": "repair_machine",
+          "condition": null,
+          "state_updates": [
+            { "variable": "inventory", "operation": "add", "value": "sun_crystal" }
+          ]
+        }
+      ]
+    },
+    "riddle_failed": {
+      "id": "riddle_failed",
+      "text": "غلط! الآلهة غضبت عليك. حاسس فجأة بصداع جامد وتعب في جسمك كله كأنه عقاب سحري. الكاهن نصحك تمشي بسرعة قبل ما حراس المعبد يقبضوا عليك.",
+      "image_path": "assets/images/history_temple_dark.webp",
+      "audio_path": "assets/audio/history_tension.mp3",
+      "sfx_path": "assets/audio/thunder.mp3",
+      "effect": "flash_red",
+      "choices": [
+        {
+          "text": "اهرب وروح لموقع بناء الهرم ودور على مخرج",
+          "target_node_id": "pyramid_site",
+          "condition": null,
+          "state_updates": null
+        }
+      ]
+    },
+    "pyramid_site": {
+      "id": "pyramid_site",
+      "text": "وصلت موقع بناء الهرم المليان عمال وعساكر. تحت خشب الهرم الكبير، لقيت منصة طقوس قديمة عليها تمثال صغير لأبو الهول بيطلع منه نور غريب. العساكر بيقربوا منك بشك، وقدامك ثواني تتصرف فيها!",
+      "image_path": "assets/images/history_site.webp",
+      "audio_path": "assets/audio/history_tension.mp3",
+      "sfx_path": null,
+      "effect": null,
+      "timer_seconds": 12,
+      "fallback_node_id": "caught_by_guards",
+      "choices": [
+        {
+          "text": "نط ناحية المنصة عشان تفتش تمثال أبو الهول",
+          "target_node_id": "inspect_sphinx",
+          "condition": null,
+          "state_updates": null
+        },
+        {
+          "text": "حاول ترجع لورا وتستخبى ورا حجر من الأحجار الكبيرة",
+          "target_node_id": "hide_stones",
+          "condition": null,
+          "state_updates": [
+            { "variable": "fear", "operation": "add", "value": 15 }
+          ]
+        }
+      ]
+    },
+    "inspect_sphinx": {
+      "id": "inspect_sphinx",
+      "text": "إنت واقف قدام تمثال أبو الهول الدهب الصغير على المنصة. طالع منه طاقة واضحة. يلا نستخدم الـ AR عشان نفحص التمثال وندور على بلورة الطاقة المستخبية جواه! حط تمثال أبو الهول على الترابيزة، واضغط على عينيه عشان تفتح المكان السري.",
+      "image_path": "assets/images/history_sphinx.webp",
+      "audio_path": "assets/audio/history_tension.mp3",
+      "sfx_path": null,
+      "effect": null,
+      "ar_config": {
+        "model_path": "assets/models/sphinx_statue.glb",
+        "prompt_text": {
+          "ar": "حط تمثال أبو الهول على الترابيزة، واضغط على عينيه عشان تفتح المكان السري",
+          "en": "Place the Sphinx statue on the table, and tap its eyes to open the secret compartment"
+        },
+        "trigger_item": "sun_crystal"
+      },
+      "choices": [
+        {
+          "text": "بعد ما أخدت بلورة الشمس، اجري بسرعة لآلة الزمن بتاعتك",
+          "target_node_id": "repair_machine",
+          "condition": {
+            "variable": "inventory",
+            "operator": "contains",
+            "value": "sun_crystal"
+          },
+          "state_updates": null
+        },
+        {
+          "text": "ملقتش البلورة، والعساكر حاصروك!",
+          "target_node_id": "caught_by_guards",
+          "condition": {
+            "variable": "inventory",
+            "operator": "not_contains",
+            "value": "sun_crystal"
+          },
+          "state_updates": null
+        }
+      ]
+    },
+    "hide_stones": {
+      "id": "hide_stones",
+      "text": "استخبيت ورا حجرة كبيرة. العساكر بيدوروا عليك حواليك. ضربات قلبك سريعة جداً من كتر الخوف. لازم تهدى خالص عشان محدش ياخد باله منك...",
+      "image_path": "assets/images/history_stones.webp",
+      "audio_path": "assets/audio/history_tension.mp3",
+      "sfx_path": null,
+      "effect": null,
+      "choices": [
+        {
+          "text": "حاول تاخد نفس عميق وتهدي نفسك وتتسلل للمنصة",
+          "target_node_id": "inspect_sphinx",
+          "condition": null,
+          "state_updates": null
+        },
+        {
+          "text": "الهلع يسيطر عليك وتبدأ تجري عشوائي!",
+          "target_node_id": "caught_by_guards",
+          "condition": null,
+          "state_updates": null
+        }
+      ]
+    },
+    "repair_machine": {
+      "id": "repair_machine",
+      "text": "وصلت لآلة الزمن وحطيت بلورة الشمس في المحرك. الآلة طلعت صوت عالي واتحولت للون الأزرق المنور، واختفت فجأة في ثانية ولقيت نفسك واقف في أوضتك في القرن الواحد وعشرين سليم ومعاك جعران فرعوني حقيقي كذكرى! النهاية: سيد الزمن",
+      "image_path": "assets/images/history_victory.webp",
+      "audio_path": "assets/audio/victory_theme.mp3",
+      "sfx_path": "assets/audio/time_travel.mp3",
+      "effect": null,
+      "is_ending": true,
+      "ending_title": "سيد الزمن",
+      "choices": []
+    },
+    "caught_by_guards": {
+      "id": "caught_by_guards",
+      "text": "العساكر مسكوك وخدوك للفرعون كأنك جاسوس غريب الأطوار. اتحكم عليك بالعمل الشاق وشيل الحجارة عشان تبني الأهرامات طول عمرك. بقيت حتة من التاريخ فعلاً، بس بطريقة غلط! النهاية: باني الأهرامات الأبدي",
+      "image_path": "assets/images/history_jail.webp",
+      "audio_path": "assets/audio/game_over_theme.mp3",
+      "sfx_path": "assets/audio/guard_laugh.mp3",
+      "effect": "flash_red",
+      "is_ending": true,
+      "ending_title": "باني الأهرامات الأبدي",
+      "choices": []
+    }
+  }
+}

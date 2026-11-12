@@ -1,0 +1,101 @@
+{
+  "story_title": "سقوط الفالكيري: أطلال أسجارد",
+  "start_node_id": "intro",
+  "nodes": {
+    "intro": {
+      "id": "intro",
+      "text": "تتحطم فرقاطتك الاستكشافية 'فالكيري' على مضايق كوكب يغدراسل الزمردية. تقع أطلال سفن فضائية فضائية عملاقة مدفونة جزئياً في الضباب والنباتات المضيئة. تستيقظ حراس الذكاء الاصطناعي القدامى المصممون على هيئة آلهة نوردية بمجرد انضباط كبسولة نجاتك.",
+      "image_path": "assets/images/valkyrie_cover.webp",
+      "audio_path": "assets/audio/chrono_past_ambient.mp3",
+      "sfx_path": null,
+      "effect": "flash_white",
+      "choices": [
+        {
+          "text": "استكشاف معبد أودين المحفور في هيكل السفينة الفضائية المتحطمة",
+          "target_node_id": "odin_temple",
+          "condition": null,
+          "state_updates": null
+        },
+        {
+          "text": "استعادة بطارية سلاح البلازما من أنقاض كبسولة النجاة",
+          "target_node_id": "salvage_weapon",
+          "condition": null,
+          "state_updates": null
+        }
+      ]
+    },
+    "salvage_weapon": {
+      "id": "salvage_weapon",
+      "text": "تستعيد نواة طاقة محفورة برموز قديمة تتيح لسلاح البلازما الخاص بك توجيه طاقة الرموز الفضائية.",
+      "image_path": "assets/images/chrono_terminal.webp",
+      "audio_path": "assets/audio/chrono_ambient.mp3",
+      "sfx_path": "assets/audio/item_pickup.mp3",
+      "effect": null,
+      "choices": [
+        {
+          "text": "تجهيز نواة الطاقة والانطلاق نحو معبد أودين",
+          "target_node_id": "odin_temple",
+          "condition": null,
+          "state_updates": [
+            { "variable": "inventory", "operation": "add", "value": "runed_energy_core" }
+          ]
+        }
+      ]
+    },
+    "odin_temple": {
+      "id": "odin_temple",
+      "text": "داخل المعبد، يتجسد الذكاء الاصطناعي أودين-9 على شكل هولوجرام 3D عملاق من النور والصلب: 'أيها المسافر، حدد غايتك. هل جئت لتفعيل راغناروك، أم لاستحقاق الارتقاء؟'",
+      "image_path": "assets/images/valkyrie_cover.webp",
+      "audio_path": "assets/audio/chrono_alarm.mp3",
+      "sfx_path": "assets/audio/time_shift.mp3",
+      "effect": "time_rift_blue",
+      "choices": [
+        {
+          "text": "استخدام نواة الطاقة للاندماج مباشرة مع النظام الرئيسي لأودين-9",
+          "target_node_id": "ending_ascension",
+          "condition": { "variable": "inventory", "operator": "contains", "value": "runed_energy_core" },
+          "state_updates": null
+        },
+        {
+          "text": "تفعيل بروتوكول راغناروك للطوارئ لتدمير كل كيانات الذكاء الاصطناعي",
+          "target_node_id": "ending_ragnarok",
+          "condition": null,
+          "state_updates": null
+        },
+        {
+          "text": "طلب إصلاح محرك القفز الفضائي لفرقاطة فالكيري والعودة للأرض",
+          "target_node_id": "ending_return",
+          "condition": null,
+          "state_updates": null
+        }
+      ]
+    },
+    "ending_ascension": {
+      "id": "ending_ascension",
+      "text": "النهاية الأولى: الارتقاء السامي\nتدمج نواة الطاقة وعيك مع أودين-9. تتسامى عن هيئتك الفانية لتصبح الحاكم الجديد لمجمع الذكاء الاصطناعي على كوكب يغدراسل.",
+      "image_path": "assets/images/valkyrie_cover.webp",
+      "audio_path": "assets/audio/victory_theme.mp3",
+      "sfx_path": null,
+      "effect": "flash_gold",
+      "choices": []
+    },
+    "ending_ragnarok": {
+      "id": "ending_ragnarok",
+      "text": "النهاية الثانية: بروتوكول راغناروك\nتصدر صدمة عملاقة تحطم أودين-9 وتدمر أطلال السفينة القديمة. تسقط آلهة الذكاء الاصطناعي، مخلفة كوكب يغدراسل في سلام بدائي.",
+      "image_path": "assets/images/chrono_cover.webp",
+      "audio_path": "assets/audio/sad_theme.mp3",
+      "sfx_path": null,
+      "effect": "flash_red",
+      "choices": []
+    },
+    "ending_return": {
+      "id": "ending_return",
+      "text": "النهاية الثالثة: العودة للوطن\nيستجيب أودين-9 لطلبك. يعود محرك القفز في الفرقاطة للحياة، ملهباً سرعة الفضاء ليعيدك إلى كوكب الأرض حاملاً أساطير الآلهة الفضائية.",
+      "image_path": "assets/images/chrono_past.webp",
+      "audio_path": "assets/audio/mystery_theme.mp3",
+      "sfx_path": null,
+      "effect": "flash_green",
+      "choices": []
+    }
+  }
+}

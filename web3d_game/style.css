@@ -1,0 +1,515 @@
+:root {
+  --primary-glow: #e63946;
+  --accent-gold: #ffb703;
+  --cyan-neon: #00f5d4;
+  --purple-neon: #7c4dff;
+  --bg-glass: rgba(15, 17, 23, 0.88);
+  --border-glass: rgba(255, 255, 255, 0.15);
+  --text-main: #f8f9fa;
+  --text-muted: #a0aab2;
+  --radius: 16px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  user-select: none;
+}
+
+body, html {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  font-family: 'Inter', 'Tajawal', sans-serif;
+  background-color: #050608;
+  color: var(--text-main);
+}
+
+#canvas-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+#ui-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 16px 24px;
+}
+
+.glass-btn, .dialogue-card, .status-meter, .hub-container, .hint-banner-card, .lock-puzzle-card {
+  pointer-events: auto;
+}
+
+/* Header Bar */
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  z-index: 50;
+}
+
+.game-badge {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--bg-glass);
+  border: 1px solid var(--border-glass);
+  backdrop-filter: blur(16px);
+  padding: 10px 18px;
+  border-radius: 30px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  font-size: 0.85rem;
+  color: #fff;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+}
+
+.pulse-dot {
+  width: 10px;
+  height: 10px;
+  background-color: var(--primary-glow);
+  border-radius: 50%;
+  box-shadow: 0 0 10px var(--primary-glow);
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(0.9); opacity: 0.8; }
+  50% { transform: scale(1.3); opacity: 1; }
+  100% { transform: scale(0.9); opacity: 0.8; }
+}
+
+.top-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* Glowing Hint Button */
+.hint-pulse-btn {
+  background: rgba(255, 183, 3, 0.18) !important;
+  border: 1px solid var(--accent-gold) !important;
+  color: var(--accent-gold) !important;
+  box-shadow: 0 0 15px rgba(255, 183, 3, 0.4);
+  animation: goldPulse 2s infinite;
+}
+
+@keyframes goldPulse {
+  0% { box-shadow: 0 0 8px rgba(255, 183, 3, 0.3); }
+  50% { box-shadow: 0 0 22px rgba(255, 183, 3, 0.8); }
+  100% { box-shadow: 0 0 8px rgba(255, 183, 3, 0.3); }
+}
+
+.status-meter {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--bg-glass);
+  border: 1px solid var(--border-glass);
+  backdrop-filter: blur(12px);
+  padding: 8px 14px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+}
+
+.meter-bar {
+  width: 65px;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+#battery-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #ffb703, #00f5d4);
+  transition: width 0.4s ease;
+}
+
+#fear-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #e63946, #d62828);
+  transition: width 0.4s ease;
+}
+
+/* Glass Buttons */
+.glass-btn {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--border-glass);
+  backdrop-filter: blur(16px);
+  color: #fff;
+  padding: 9px 16px;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.glass-btn:hover {
+  background: rgba(255, 255, 255, 0.22);
+  border-color: rgba(255, 255, 255, 0.4);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+}
+
+.gold-btn {
+  background: linear-gradient(135deg, #ffb703, #fb8500) !important;
+  color: #000 !important;
+  font-weight: 800 !important;
+}
+
+.gold-btn:hover {
+  box-shadow: 0 0 20px rgba(255, 183, 3, 0.6) !important;
+}
+
+.small-btn {
+  padding: 6px 12px;
+  font-size: 0.75rem;
+}
+
+.icon-btn {
+  padding: 9px;
+  border-radius: 50%;
+}
+
+/* Detective Hint Banner Card */
+.hint-banner-card {
+  background: rgba(255, 183, 3, 0.12);
+  border: 1px solid var(--accent-gold);
+  border-radius: 12px;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.95rem;
+  color: #ffecd1;
+  box-shadow: 0 4px 20px rgba(255, 183, 3, 0.25);
+  margin-top: 8px;
+  animation: slideDown 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hint-icon-glow {
+  font-size: 1.4rem;
+  filter: drop-shadow(0 0 8px var(--accent-gold));
+}
+
+@keyframes slideDown {
+  from { transform: translateY(-10px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* LOCK PUZZLE MODAL */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(12px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.lock-puzzle-card {
+  padding: 30px;
+  max-width: 480px;
+  width: 90%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.dial-container {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin: 10px 0;
+}
+
+.dial-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  background: rgba(0, 0, 0, 0.5);
+  border: 2px solid var(--accent-gold);
+  border-radius: 12px;
+  padding: 10px 14px;
+  box-shadow: 0 0 15px rgba(255, 183, 3, 0.2);
+}
+
+.dial-btn {
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: var(--accent-gold);
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 4px 10px;
+  border-radius: 6px;
+  transition: background 0.2s ease;
+}
+
+.dial-btn:hover {
+  background: rgba(255, 183, 3, 0.3);
+}
+
+.dial-val {
+  font-size: 2.2rem;
+  font-weight: 900;
+  color: #fff;
+  text-shadow: 0 0 10px var(--accent-gold);
+}
+
+.puzzle-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+
+.feedback-text {
+  font-size: 0.9rem;
+  font-weight: 700;
+  min-height: 20px;
+}
+
+/* 3D STORY HUB OVERLAY */
+.hub-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(5, 6, 8, 0.88);
+  backdrop-filter: blur(18px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 40;
+  padding: 40px 20px;
+  overflow-y: auto;
+}
+
+.hub-container {
+  width: 100%;
+  max-width: 1100px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  margin: auto;
+}
+
+.hub-header {
+  text-align: center;
+}
+
+.hub-header h1 {
+  font-size: 2.5rem;
+  font-weight: 900;
+  color: #fff;
+  letter-spacing: 2px;
+  text-shadow: 0 0 20px rgba(230, 57, 70, 0.5);
+}
+
+.hub-header p {
+  color: var(--text-muted);
+  font-size: 1rem;
+  margin-top: 8px;
+}
+
+.story-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+}
+
+.story-card {
+  background: var(--bg-glass);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 16px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.story-card:hover {
+  transform: translateY(-8px);
+  border-color: var(--primary-glow);
+  box-shadow: 0 12px 35px rgba(230, 57, 70, 0.3);
+}
+
+.story-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.story-card-icon {
+  font-size: 2.5rem;
+}
+
+.genre-tag {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--accent-gold);
+}
+
+.story-card h3 {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: #fff;
+}
+
+.story-card p {
+  font-size: 0.9rem;
+  color: #cbd5e1;
+  line-height: 1.5;
+}
+
+.play-btn {
+  width: 100%;
+  background: linear-gradient(135deg, var(--primary-glow), #d62828);
+  border: none;
+  padding: 14px;
+  border-radius: 12px;
+  color: #fff;
+  font-weight: 800;
+  font-size: 0.95rem;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 15px rgba(230, 57, 70, 0.4);
+}
+
+.play-btn:hover {
+  transform: scale(1.02);
+  box-shadow: 0 6px 25px rgba(230, 57, 70, 0.6);
+}
+
+/* Gameplay Dialogue Box */
+.glass-panel {
+  background: var(--bg-glass);
+  border: 1px solid var(--border-glass);
+  backdrop-filter: blur(24px);
+  border-radius: var(--radius);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
+}
+
+.dialogue-card {
+  width: 100%;
+  max-width: 850px;
+  margin: 0 auto;
+  padding: 20px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.character-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding-bottom: 8px;
+}
+
+.character-header h2 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.location-tag {
+  font-size: 0.75rem;
+  color: var(--accent-gold);
+  letter-spacing: 1px;
+  font-weight: 600;
+  display: block;
+  margin-top: 2px;
+}
+
+.story-body {
+  font-size: 1.0rem;
+  line-height: 1.55;
+  color: #e2e8f0;
+}
+
+.choices-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.choice-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 12px 16px;
+  border-radius: 12px;
+  color: #f1f5f9;
+  font-size: 0.92rem;
+  font-weight: 500;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.choice-btn:hover {
+  background: rgba(230, 57, 70, 0.25);
+  border-color: var(--primary-glow);
+  transform: translateX(4px);
+}
+
+.shake-red {
+  animation: jumpscareShake 0.6s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+  border-color: #e63946 !important;
+  box-shadow: 0 0 40px rgba(230, 57, 70, 0.8) !important;
+}
+
+@keyframes jumpscareShake {
+  10%, 90% { transform: translate3d(-4px, 0, 0); }
+  20%, 80% { transform: translate3d(6px, 0, 0); }
+  30%, 50%, 70% { transform: translate3d(-8px, 0, 0); }
+  40%, 60% { transform: translate3d(8px, 0, 0); }
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* RTL Support */
+[dir="rtl"] .choice-btn { text-align: right; }
+[dir="rtl"] .hub-header { text-align: center; }

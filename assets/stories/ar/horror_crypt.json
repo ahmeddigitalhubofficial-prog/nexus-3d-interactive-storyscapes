@@ -1,0 +1,267 @@
+{
+  "story_title": "سرداب الأسرار",
+  "start_node_id": "intro",
+  "nodes": {
+    "intro": {
+      "id": "intro",
+      "text": "إنت واقف قدام البوابة الحديد المصدي بتاعة السرداب القديم. الضباب مالك المكان كله، وفي همسات غامضة كأنها بتناديك تدخل جوة. حاسس ببرد غريب ماشي في جسمك كله...",
+      "image_path": "assets/images/horror_gate.webp",
+      "audio_path": "assets/audio/horror_ambient.mp3",
+      "sfx_path": null,
+      "effect": null,
+      "choices": [
+        {
+          "text": "ادخل حوش السرداب الضلمة",
+          "target_node_id": "garden",
+          "condition": null,
+          "state_updates": [
+            { "variable": "fear", "operation": "add", "value": 15 }
+          ]
+        },
+        {
+          "text": "دور حوالين السور الخارجي الأول",
+          "target_node_id": "search_wall",
+          "condition": null,
+          "state_updates": null
+        }
+      ]
+    },
+    "search_wall": {
+      "id": "search_wall",
+      "text": "دورت جنب السور القديم المهدوم، ولقيت كشاف يدوي قديم بين الشجر الناشف. شكله لسه شغال!",
+      "image_path": "assets/images/horror_wall.webp",
+      "audio_path": "assets/audio/horror_ambient.mp3",
+      "sfx_path": "assets/audio/item_pickup.mp3",
+      "effect": "flash_red",
+      "codex_updates": [
+        { "entry_id": "flashlight_info", "unlocked": true }
+      ],
+      "choices": [
+        {
+          "text": "خد الكشاف وارجع للبوابة الرئيسية",
+          "target_node_id": "intro_have_flashlight",
+          "condition": null,
+          "state_updates": [
+            { "variable": "inventory", "operation": "add", "value": "flashlight" }
+          ]
+        }
+      ]
+    },
+    "intro_have_flashlight": {
+      "id": "intro_have_flashlight",
+      "text": "دلوقتي بعد ما أخدت الكشاف، البوابة الحديد شكلها يخوف أقل شوية، بس الهمسات لسه شغالة وبتناديك تدخل...",
+      "image_path": "assets/images/horror_gate.webp",
+      "audio_path": "assets/audio/horror_ambient.mp3",
+      "sfx_path": null,
+      "effect": null,
+      "choices": [
+        {
+          "text": "ادخل حوش السرداب بالكشاف",
+          "target_node_id": "garden",
+          "condition": null,
+          "state_updates": [
+            { "variable": "fear", "operation": "add", "value": 5 }
+          ]
+        }
+      ]
+    },
+    "garden": {
+      "id": "garden",
+      "text": "دخلت الحوش. الدنيا ضلمة كحل هنا والشجر الميت شكله كأنه إيدين وحوش عايزة تمسكك. في صندوق خشب غريب في الركن، وباب السرداب الرئيسي في النص.",
+      "image_path": "assets/images/horror_garden.webp",
+      "audio_path": "assets/audio/horror_ambient.mp3",
+      "sfx_path": null,
+      "effect": null,
+      "choices": [
+        {
+          "text": "قرب من الصندوق الخشب عشان تفحصه",
+          "target_node_id": "inspect_chest",
+          "condition": {
+            "variable": "inventory",
+            "operator": "contains",
+            "value": "flashlight"
+          },
+          "state_updates": null
+        },
+        {
+          "text": "حاول تفتح باب السرداب الرئيسي على طول",
+          "target_node_id": "main_door",
+          "condition": null,
+          "state_updates": null
+        },
+        {
+          "text": "اتجه لزاوية الحوش الضلمة عشان تدور على مخرج تاني",
+          "target_node_id": "dark_trap",
+          "condition": {
+            "variable": "inventory",
+            "operator": "contains",
+            "value": "flashlight"
+          },
+          "state_updates": null
+        },
+        {
+          "text": "[مقفول] افحص الصندوق الخشب (محتاج كشاف عشان تشوف)",
+          "target_node_id": "inspect_chest",
+          "condition": {
+            "variable": "inventory",
+            "operator": "not_contains",
+            "value": "flashlight"
+          },
+          "state_updates": null
+        }
+      ]
+    },
+    "inspect_chest": {
+      "id": "inspect_chest",
+      "text": "إنت واقف قدام الصندوق الخشب القديم. في رموز أثرية غريبة محفورة عليه. شكله محتاج فحص دقيق وقريب عشان تعرف جواه إيه. حط الصندوق الخشب على سطح مستوي قدامك، واضغط عليه مرتين عشان تفتحه.",
+      "image_path": "assets/images/horror_chest.webp",
+      "audio_path": "assets/audio/horror_tension.mp3",
+      "sfx_path": null,
+      "effect": null,
+      "ar_config": {
+        "model_path": "assets/models/mystery_chest.glb",
+        "prompt_text": {
+          "ar": "حط الصندوق الخشب على سطح مستوي قدامك، واضغط عليه مرتين عشان تفتحه",
+          "en": "Place the wooden chest on a flat surface in front of you, then double-tap it to open"
+        },
+        "trigger_item": "rusty_key"
+      },
+      "choices": [
+        {
+          "text": "بعد ما لقيت المفتاح، روح عند باب السرداب الرئيسي",
+          "target_node_id": "main_door",
+          "condition": {
+            "variable": "inventory",
+            "operator": "contains",
+            "value": "rusty_key"
+          },
+          "state_updates": null
+        },
+        {
+          "text": "ارجع لنص الحوش تاني",
+          "target_node_id": "garden",
+          "condition": {
+            "variable": "inventory",
+            "operator": "not_contains",
+            "value": "rusty_key"
+          },
+          "state_updates": null
+        }
+      ]
+    },
+    "main_door": {
+      "id": "main_door",
+      "text": "إنت واقف قدام باب السرداب الحجر الكبير. في قفل نحاس قديم قفله. شكله محتاج مفتاح مخصوص.",
+      "image_path": "assets/images/horror_door.webp",
+      "audio_path": "assets/audio/horror_tension.mp3",
+      "sfx_path": null,
+      "effect": null,
+      "choices": [
+        {
+          "text": "افتح الباب بالمفتاح المصدي اللي لقيته",
+          "target_node_id": "victory_escape",
+          "condition": {
+            "variable": "inventory",
+            "operator": "contains",
+            "value": "rusty_key"
+          },
+          "state_updates": null
+        },
+        {
+          "text": "الباب مقفول جامد. ارجع للحوش ودور على طريقة تفتحه بيها",
+          "target_node_id": "garden",
+          "condition": {
+            "variable": "inventory",
+            "operator": "not_contains",
+            "value": "rusty_key"
+          },
+          "state_updates": [
+            { "variable": "fear", "operation": "add", "value": 10 }
+          ]
+        }
+      ]
+    },
+    "victory_escape": {
+      "id": "victory_escape",
+      "text": "المفتاح المصدي لف في القفل النحاس بصعوبة والباب اتفتح بصوت تزييق عالي. جريت لجوة ولقيت ممر سري مليان دهب وكنوز، وقفلت الباب وراك بسرعة عشان تهرب من الوحوش اللي في الحوش الضلمة! النهاية: الناجي الشاطر",
+      "image_path": "assets/images/horror_victory.webp",
+      "audio_path": "assets/audio/victory_theme.mp3",
+      "sfx_path": "assets/audio/door_open.mp3",
+      "effect": null,
+      "is_ending": true,
+      "ending_title": "الناجي الشاطر",
+      "choices": []
+    },
+    "dark_trap": {
+      "id": "dark_trap",
+      "text": "فجأة! الكشاف اليدوي طفى وطلع صوت زئير مرعب من ورا الشجر! في حاجة بتجري ناحيتك بسرعة رهيبة في الضلمة الكحل!",
+      "image_path": "assets/images/horror_chase.webp",
+      "audio_path": "assets/audio/horror_chase.mp3",
+      "sfx_path": "assets/audio/monster_roar.mp3",
+      "effect": "shake",
+      "timer_seconds": 10,
+      "fallback_node_id": "game_over_caught",
+      "choices": [
+        {
+          "text": "نط بسرعة على اليمين ورا صخرة كبيرة واستخبى",
+          "target_node_id": "hide_success",
+          "condition": null,
+          "state_updates": [
+            { "variable": "health", "operation": "subtract", "value": 10 },
+            { "variable": "fear", "operation": "add", "value": 20 }
+          ]
+        },
+        {
+          "text": "اجري ناحية البوابة الحديد عشان تهرب برة",
+          "target_node_id": "game_over_caught",
+          "condition": null,
+          "state_updates": null
+        }
+      ]
+    },
+    "hide_success": {
+      "id": "hide_success",
+      "text": "استخبيت ورا الصخرة وإيديك بتترعش. الكائن المرعب عدى من جنب الصخرة وهو بيتنفس بصوت عالي وبعدين مشي. حاسس بقلبك هيقف من كتر الخوف! لازم تهدي نفسك عشان تقدر تكمل المغامرة...",
+      "image_path": "assets/images/horror_hide.webp",
+      "audio_path": "assets/audio/horror_tension.mp3",
+      "sfx_path": null,
+      "effect": null,
+      "choices": [
+        {
+          "text": "حاول تاخد نفس عميق وتهدي نفسك وتكمل في الحوش",
+          "target_node_id": "garden",
+          "condition": null,
+          "state_updates": null
+        },
+        {
+          "text": "الهلع يسيطر عليك وتجري وتصرخ!",
+          "target_node_id": "game_over_panic",
+          "condition": null,
+          "state_updates": null
+        }
+      ]
+    },
+    "game_over_caught": {
+      "id": "game_over_caught",
+      "text": "مكانتش سريع كفاية! الكائن الضلمة هجم عليك من ورا الشجر وسحبك لجوة الضلمة... مغامرتك خلصت هنا. النهاية: ضحية الضلمة",
+      "image_path": "assets/images/horror_death.webp",
+      "audio_path": "assets/audio/game_over_theme.mp3",
+      "sfx_path": "assets/audio/jumpscare.mp3",
+      "effect": "flash_red",
+      "is_ending": true,
+      "ending_title": "ضحية الضلمة",
+      "choices": []
+    },
+    "game_over_panic": {
+      "id": "game_over_panic",
+      "text": "الخوف تملكك بالكامل وبدأت تتنفس بصوت عالي! الكائن سمع صوت نفسك اللي بيترعش ولف ناحيتك فجأة... مغامرتك خلصت هنا. النهاية: مات من الخوف",
+      "image_path": "assets/images/horror_death.webp",
+      "audio_path": "assets/audio/game_over_theme.mp3",
+      "sfx_path": "assets/audio/jumpscare.mp3",
+      "effect": "flash_red",
+      "is_ending": true,
+      "ending_title": "مات من الخوف",
+      "choices": []
+    }
+  }
+}

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nexus 3D: Interactive Storyscapes</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- Google Fonts: Inter & Tajawal -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+  <!-- Three.js CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <!-- OrbitControls -->
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+  <!-- PostProcessing & Unreal Bloom -->
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/EffectComposer.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/RenderPass.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/shaders/CopyShader.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/ShaderPass.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/shaders/LuminosityHighPassShader.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/UnrealBloomPass.js"></script>
+</head>
+<body>
+  <!-- 3D Canvas Container -->
+  <div id="canvas-container"></div>
+
+  <!-- UI Overlay -->
+  <div id="ui-overlay">
+    <!-- Top Header Bar -->
+    <header class="top-bar">
+      <div class="game-badge">
+        <span class="pulse-dot"></span>
+        <span id="game-title">NEXUS 3D: STORYSCAPES</span>
+      </div>
+
+      <div class="top-actions">
+        <!-- Hub Home Button -->
+        <button id="hub-btn" class="glass-btn action-btn">
+          <span>🏛️ Story Hub</span>
+        </button>
+
+        <!-- Dynamic 3D Hint Button -->
+        <button id="hint-btn" class="glass-btn hint-pulse-btn hidden" title="Reveal Detective Hint">
+          <span>💡 HINT</span>
+        </button>
+
+        <!-- Status Meters -->
+        <div class="status-meter hidden" id="battery-container">
+          <span class="meter-icon">🔦</span>
+          <div class="meter-bar"><div id="battery-fill" style="width: 80%;"></div></div>
+        </div>
+
+        <div class="status-meter hidden" id="fear-container">
+          <span class="meter-icon">🩸</span>
+          <div class="meter-bar"><div id="fear-fill" style="width: 25%;"></div></div>
+        </div>
+
+        <!-- Language Switcher -->
+        <button id="lang-btn" class="glass-btn">
+          <span id="lang-label">EN / العربيّة</span>
+        </button>
+
+        <!-- Sound Toggle -->
+        <button id="audio-btn" class="glass-btn icon-btn" title="Toggle Sound">
+          <span id="audio-icon">🔊</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- 3D STORY SELECTION HUB OVERLAY (MAIN MENU) -->
+    <div id="story-hub-modal" class="hub-overlay">
+      <div class="hub-container">
+        <div class="hub-header">
+          <h1 id="hub-heading">3D CINEMATIC STORIES</h1>
+          <p id="hub-subheading">Choose your interactive 3D adventure & shape your destiny</p>
+        </div>
+
+        <!-- Story Cards Grid -->
+        <div class="story-grid" id="story-grid">
+          <!-- Dynamically populated story cards -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Active Gameplay Dialogue & Choice Box -->
+    <main class="dialogue-card glass-panel hidden" id="dialogue-box">
+      <div class="character-header">
+        <div>
+          <h2 id="node-title">The Entrance Gate</h2>
+          <span class="location-tag" id="location-tag">CHAPTER 1 • THE ANCIENT CRYPT</span>
+        </div>
+        <!-- Toggle View Button (Hide UI to inspect 3D scene) -->
+        <button id="toggle-ui-btn" class="glass-btn small-btn" title="Toggle UI to view 3D scene">
+          <span id="toggle-ui-icon">👁️ 3D View</span>
+        </button>
+      </div>
+
+      <div id="dialogue-content-body">
+        <p id="story-text" class="story-body">
+          Loading horror story narrative...
+        </p>
+
+        <!-- Interactive Detective Hint Banner -->
+        <div id="hint-banner" class="hint-banner-card hidden">
+          <span class="hint-icon-glow">💡</span>
+          <span id="hint-banner-text">Detective Hint...</span>
+        </div>
+
+        <!-- Dynamic Choices Container -->
+        <div id="choices-container" class="choices-grid">
+          <!-- Dynamically injected choices -->
+        </div>
+      </div>
+    </main>
+
+    <!-- INTERACTIVE 3D COMBINATION LOCK PUZZLE MODAL -->
+    <div id="puzzle-modal" class="modal-overlay hidden">
+      <div class="glass-panel modal-card lock-puzzle-card">
+        <h3 id="puzzle-title">🗝️ Ancient Combination Lock</h3>
+        <p id="puzzle-desc">Enter the 4-digit alchemical code written in Lord Blackwood's journal (Year of Disappearance):</p>
+
+        <!-- 4 Combination Dials -->
+        <div class="dial-container">
+          <div class="dial-box">
+            <button class="dial-btn" onclick="adjustDial(0, 1)">▲</button>
+            <span class="dial-val" id="dial-0">0</span>
+            <button class="dial-btn" onclick="adjustDial(0, -1)">▼</button>
+          </div>
+          <div class="dial-box">
+            <button class="dial-btn" onclick="adjustDial(1, 1)">▲</button>
+            <span class="dial-val" id="dial-1">0</span>
+            <button class="dial-btn" onclick="adjustDial(1, -1)">▼</button>
+          </div>
+          <div class="dial-box">
+            <button class="dial-btn" onclick="adjustDial(2, 1)">▲</button>
+            <span class="dial-val" id="dial-2">0</span>
+            <button class="dial-btn" onclick="adjustDial(2, -1)">▼</button>
+          </div>
+          <div class="dial-box">
+            <button class="dial-btn" onclick="adjustDial(3, 1)">▲</button>
+            <span class="dial-val" id="dial-3">0</span>
+            <button class="dial-btn" onclick="adjustDial(3, -1)">▼</button>
+          </div>
+        </div>
+
+        <div class="puzzle-actions">
+          <button id="unlock-submit-btn" class="glass-btn action-btn gold-btn">🔓 UNLOCK CHEST</button>
+          <button id="puzzle-close-btn" class="glass-btn action-btn">⬅️ Step Back</button>
+        </div>
+        <p id="lock-feedback" class="feedback-text"></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Game Scripts -->
+  <script src="crypt_scene.js?v=400"></script>
+  <script src="scene_manager.js?v=400"></script>
+  <script src="story_engine.js?v=400"></script>
+  <script src="audio_engine.js?v=400"></script>
+  <script src="app.js?v=400"></script>
+</body>
+</html>

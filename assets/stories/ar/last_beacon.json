@@ -1,0 +1,101 @@
+{
+  "story_title": "المنارة الأخيرة",
+  "start_node_id": "intro",
+  "nodes": {
+    "intro": {
+      "id": "intro",
+      "text": "تعصف الرياح القارسة عبر السهول المتجمدة. تومض منارة الضوء العملاقة في المحطة ألفا تحت شفق قطبي زمردي. بصفتك كبير مهندسي المنارات، تترجل من مركبتك الثلجية. تصطاد كائنات الظلال في عتمة الليل خلف حد النور.",
+      "image_path": "assets/images/beacon_cover.webp",
+      "audio_path": "assets/audio/chrono_ambient.mp3",
+      "sfx_path": null,
+      "effect": null,
+      "choices": [
+        {
+          "text": "تسلق برج المنارة الجليدي لإصلاح مشعل الاندماج الرئيسي",
+          "target_node_id": "beacon_tower",
+          "condition": null,
+          "state_updates": null
+        },
+        {
+          "text": "فحص مصفوفة المستشعرات الصوتية قرب المركبة الثلجية",
+          "target_node_id": "sensor_array",
+          "condition": null,
+          "state_updates": null
+        }
+      ]
+    },
+    "sensor_array": {
+      "id": "sensor_array",
+      "text": "تعيد معايرة المستشعرات الصوتية، وتحصل على قاذف الشعلة الصوتية الذي يطرد كائنات الظلال بنبضات صوتية عالية.",
+      "image_path": "assets/images/horror_wall.webp",
+      "audio_path": "assets/audio/chrono_ambient.mp3",
+      "sfx_path": "assets/audio/item_pickup.mp3",
+      "effect": null,
+      "choices": [
+        {
+          "text": "أخذ قاذف الشعلة الصوتية وتسلق برج المنارة",
+          "target_node_id": "beacon_tower",
+          "condition": null,
+          "state_updates": [
+            { "variable": "inventory", "operation": "add", "value": "acoustic_flare" }
+          ]
+        }
+      ]
+    },
+    "beacon_tower": {
+      "id": "beacon_tower",
+      "text": "عند قمة البرج، ينطفئ قلب المنارة. يزحف الظلام الكلي وتتسلق الظلال السقالات. تصلك إشارة من المستعمرة البشرية: 'حافظ على شعاع الضوء وإلا ستموت المستعمرة تجلداً.'",
+      "image_path": "assets/images/beacon_cover.webp",
+      "audio_path": "assets/audio/chrono_alarm.mp3",
+      "sfx_path": null,
+      "effect": "flash_red",
+      "choices": [
+        {
+          "text": "إطلاق قاذف الشعلة الصوتية لطرد وحوش الظلال وإصلاح المشعل",
+          "target_node_id": "ending_dawn",
+          "condition": { "variable": "inventory", "operator": "contains", "value": "acoustic_flare" },
+          "state_updates": null
+        },
+        {
+          "text": "زيادة شحن بطارية المركبة الثلجية وتفريغها مباشرة في البرج",
+          "target_node_id": "ending_silence",
+          "condition": null,
+          "state_updates": null
+        },
+        {
+          "text": "الانسحاب إلى المركبة الثلجية والهروب نحو الظلام بحثاً عن مأوى",
+          "target_node_id": "ending_lost",
+          "condition": null,
+          "state_updates": null
+        }
+      ]
+    },
+    "ending_dawn": {
+      "id": "ending_dawn",
+      "text": "النهاية الأولى: الفجر الأبدي\nتطرد الشعلة الصوتية الوحوش للوقت الكافي لإصلاح المفاعل. ينطلق عمود ضوء دافئ يتخلق في السماء، يعيد الطاقة والدفء لجميع المستعمرات البشرية الناجية.",
+      "image_path": "assets/images/beacon_cover.webp",
+      "audio_path": "assets/audio/victory_theme.mp3",
+      "sfx_path": null,
+      "effect": "flash_gold",
+      "choices": []
+    },
+    "ending_silence": {
+      "id": "ending_silence",
+      "text": "النهاية الثانية: الصمت المتجمد\nيؤدي تفريغ البطارية إلى إشعال منارة دائمة تضيء العالم وتنقذ المستعمرة، لكنه يتسبب في تجميد مركبتك وتخليد بطولتك في الجليد.",
+      "image_path": "assets/images/horror_wall.webp",
+      "audio_path": "assets/audio/sad_theme.mp3",
+      "sfx_path": null,
+      "effect": "flash_white",
+      "choices": []
+    },
+    "ending_lost": {
+      "id": "ending_lost",
+      "text": "النهاية الثالثة: انقطاع الإشارة\nتنطفئ المنارة بالكامل. يبتلع الظلام المحطة ألفا بينما تائه في التندرا المتجمدة، مخلفاً مصير البشرية في مهب الريح.",
+      "image_path": "assets/images/horror_gate.webp",
+      "audio_path": "assets/audio/mystery_theme.mp3",
+      "sfx_path": null,
+      "effect": "flash_red",
+      "choices": []
+    }
+  }
+}

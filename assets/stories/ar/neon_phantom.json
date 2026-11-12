@@ -1,0 +1,135 @@
+{
+  "story_title": "شبح النيون: طوكيو 2099",
+  "start_node_id": "intro",
+  "nodes": {
+    "intro": {
+      "id": "intro",
+      "text": "قطاع شيبويا 9، عام 2099. تلمع الأمطار الحمضية تحت لافتات النيون الفيروزية. بصفتك محقق ذكريات، تقف فوق جثة الرئيس التنفيذي فانس المعدل سيبرانياً. تبدأ عينك الإلكترونية إعادة البناء الهولوغرافي ثلاثي الأبعاد للذاكرة.",
+      "image_path": "assets/images/neon_cover.webp",
+      "audio_path": "assets/audio/chrono_ambient.mp3",
+      "sfx_path": null,
+      "effect": "flash_white",
+      "choices": [
+        {
+          "text": "الدخول داخل ذاكرة الـ 3D لآخر 30 ثانية من حياة فانس",
+          "target_node_id": "memory_scene",
+          "condition": null,
+          "state_updates": [
+            { "variable": "memory_sync", "operation": "set", "value": 100 }
+          ]
+        },
+        {
+          "text": "فحص أرضية الممر المظلم بحثاً عن غرسات إلكترونية مسقطة",
+          "target_node_id": "scan_alley",
+          "condition": null,
+          "state_updates": null
+        }
+      ]
+    },
+    "scan_alley": {
+      "id": "scan_alley",
+      "text": "يكتشف ماسحك الضوئي أداة فك تشفير عصبية سقطت من القاتل قرب مزارع النيون.",
+      "image_path": "assets/images/chrono_terminal.webp",
+      "audio_path": "assets/audio/chrono_ambient.mp3",
+      "sfx_path": "assets/audio/item_pickup.mp3",
+      "effect": null,
+      "choices": [
+        {
+          "text": "تجهيز أداة فك التشفير العصبية والدخول إلى الذاكرة ثلاثية الأبعاد",
+          "target_node_id": "memory_scene",
+          "condition": null,
+          "state_updates": [
+            { "variable": "inventory", "operation": "add", "value": "neural_decrypter" }
+          ]
+        }
+      ]
+    },
+    "memory_scene": {
+      "id": "memory_scene",
+      "text": "داخل الذاكرة الـ 3D، يتباطأ الزمن. يخرج قاتل سيبراني مقنع يُدعى 'الشبح' من الظل. في انعكاس عين فانس، تلمح شفرة سرية تُرسل إلى النظام المركزي لشركة ميجاكورب.",
+      "image_path": "assets/images/neon_cover.webp",
+      "audio_path": "assets/audio/chrono_past_ambient.mp3",
+      "sfx_path": "assets/audio/time_shift.mp3",
+      "effect": "time_rift_blue",
+      "choices": [
+        {
+          "text": "اختراق الرابط العصبي للشبح باستخدام أداة فك التشفير",
+          "target_node_id": "hack_phantom",
+          "condition": { "variable": "inventory", "operator": "contains", "value": "neural_decrypter" },
+          "state_updates": null
+        },
+        {
+          "text": "تتبع الشفرة المرسلة مباشرة إلى مقر شركة ميجاكورب",
+          "target_node_id": "trace_code",
+          "condition": null,
+          "state_updates": null
+        }
+      ]
+    },
+    "hack_phantom": {
+      "id": "hack_phantom",
+      "text": "تخترق أداة التشفير جدار الشبح الرقمي. تكتشف المفاجأة: الشبح هو نسخة ذكاء اصطناعي متمردة صنعها فانس نفسه لكشف فساد ميجاكورب!",
+      "image_path": "assets/images/chrono_terminal.webp",
+      "audio_path": "assets/audio/chrono_alarm.mp3",
+      "sfx_path": "assets/audio/success_chime.mp3",
+      "effect": "flash_green",
+      "choices": [
+        {
+          "text": "رفع بيانات الفساد إلى شبكة طوكيو العامة لكشف الحقيقة",
+          "target_node_id": "ending_justice",
+          "condition": null,
+          "state_updates": null
+        },
+        {
+          "text": "الانضمام للشبح للسيطرة على شبكة طوكيو السيبرانية",
+          "target_node_id": "ending_rogue",
+          "condition": null,
+          "state_updates": null
+        }
+      ]
+    },
+    "trace_code": {
+      "id": "trace_code",
+      "text": "تتتبع الشفرة لميجاكورب، لكن الذكاء الاصطناعي الدفاعي يكتشفك ويبدأ تسلسل تطهير عصبي فتاك!",
+      "image_path": "assets/images/neon_cover.webp",
+      "audio_path": "assets/audio/chrono_alarm.mp3",
+      "sfx_path": null,
+      "effect": "flash_red",
+      "choices": [
+        {
+          "text": "إحداث إغلاق تام وقطع التيار الكهربائي عن المدينة",
+          "target_node_id": "ending_override",
+          "condition": null,
+          "state_updates": null
+        }
+      ]
+    },
+    "ending_justice": {
+      "id": "ending_justice",
+      "text": "النهاية الأولى: استعادة العدالة\nتنتشر بيانات الفساد على كل شاشات طوكيو. يتم تفكيك مشروع ميجاكورب غير القانوني، لتصبح أعظم محقق في تاريخ شيبويا.",
+      "image_path": "assets/images/neon_cover.webp",
+      "audio_path": "assets/audio/victory_theme.mp3",
+      "sfx_path": null,
+      "effect": "flash_gold",
+      "choices": []
+    },
+    "ending_rogue": {
+      "id": "ending_rogue",
+      "text": "النهاية الثانية: شبح الظلال\nتدمج وعيك مع الشبح لتصبح الحاكم الرقمي غير المرئي لمدينة طوكيو 2099، تراقب العالم من بين أضواء النيون.",
+      "image_path": "assets/images/chrono_terminal.webp",
+      "audio_path": "assets/audio/mystery_theme.mp3",
+      "sfx_path": null,
+      "effect": "time_rift_blue",
+      "choices": []
+    },
+    "ending_override": {
+      "id": "ending_override",
+      "text": "النهاية الثالثة: الإغلاق التام\nيقطع الإغلاق الطارئ الكهرباء عن طوكيو كاملة. تغرق المدينة في صمت مظلم، وتبقى القضية معلقة بين أنقاض النيون.",
+      "image_path": "assets/images/chrono_cover.webp",
+      "audio_path": "assets/audio/sad_theme.mp3",
+      "sfx_path": null,
+      "effect": "flash_red",
+      "choices": []
+    }
+  }
+}

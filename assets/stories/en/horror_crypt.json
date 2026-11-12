@@ -1,0 +1,267 @@
+{
+  "story_title": "Crypt of Secrets",
+  "start_node_id": "intro",
+  "nodes": {
+    "intro": {
+      "id": "intro",
+      "text": "You stand before the rusty iron gate of the ancient crypt. The fog fills the air, and mysterious whispers seem to call your name from within. You feel a strange chill creeping down your spine...",
+      "image_path": "assets/images/horror_gate.webp",
+      "audio_path": "assets/audio/horror_ambient.mp3",
+      "sfx_path": null,
+      "effect": null,
+      "choices": [
+        {
+          "text": "Enter the dark crypt courtyard",
+          "target_node_id": "garden",
+          "condition": null,
+          "state_updates": [
+            { "variable": "fear", "operation": "add", "value": 15 }
+          ]
+        },
+        {
+          "text": "Search around the outer wall first",
+          "target_node_id": "search_wall",
+          "condition": null,
+          "state_updates": null
+        }
+      ]
+    },
+    "search_wall": {
+      "id": "search_wall",
+      "text": "You searched near the crumbling wall and found an old flashlight among the dry bushes. It seems to still work!",
+      "image_path": "assets/images/horror_wall.webp",
+      "audio_path": "assets/audio/horror_ambient.mp3",
+      "sfx_path": "assets/audio/item_pickup.mp3",
+      "effect": "flash_red",
+      "codex_updates": [
+        { "entry_id": "flashlight_info", "unlocked": true }
+      ],
+      "choices": [
+        {
+          "text": "Pick up the flashlight and return to the main gate",
+          "target_node_id": "intro_have_flashlight",
+          "condition": null,
+          "state_updates": [
+            { "variable": "inventory", "operation": "add", "value": "flashlight" }
+          ]
+        }
+      ]
+    },
+    "intro_have_flashlight": {
+      "id": "intro_have_flashlight",
+      "text": "Now that you have a flashlight, the iron gate seems slightly less terrifying, but the whispers continue to invite you inside...",
+      "image_path": "assets/images/horror_gate.webp",
+      "audio_path": "assets/audio/horror_ambient.mp3",
+      "sfx_path": null,
+      "effect": null,
+      "choices": [
+        {
+          "text": "Enter the crypt courtyard with your flashlight",
+          "target_node_id": "garden",
+          "condition": null,
+          "state_updates": [
+            { "variable": "fear", "operation": "add", "value": 5 }
+          ]
+        }
+      ]
+    },
+    "garden": {
+      "id": "garden",
+      "text": "You entered the courtyard. The darkness here is pitch-black and the dead trees look like hands of monsters trying to grab you. There is a mysterious wooden chest in the corner, and the main crypt door is in the center.",
+      "image_path": "assets/images/horror_garden.webp",
+      "audio_path": "assets/audio/horror_ambient.mp3",
+      "sfx_path": null,
+      "effect": null,
+      "choices": [
+        {
+          "text": "Approach the wooden chest to inspect it",
+          "target_node_id": "inspect_chest",
+          "condition": {
+            "variable": "inventory",
+            "operator": "contains",
+            "value": "flashlight"
+          },
+          "state_updates": null
+        },
+        {
+          "text": "Try to open the main crypt door directly",
+          "target_node_id": "main_door",
+          "condition": null,
+          "state_updates": null
+        },
+        {
+          "text": "Head towards the dark corner of the courtyard to look for another exit",
+          "target_node_id": "dark_trap",
+          "condition": {
+            "variable": "inventory",
+            "operator": "contains",
+            "value": "flashlight"
+          },
+          "state_updates": null
+        },
+        {
+          "text": "[Locked] Inspect the wooden chest (Requires flashlight to see)",
+          "target_node_id": "inspect_chest",
+          "condition": {
+            "variable": "inventory",
+            "operator": "not_contains",
+            "value": "flashlight"
+          },
+          "state_updates": null
+        }
+      ]
+    },
+    "inspect_chest": {
+      "id": "inspect_chest",
+      "text": "You stand before the old wooden chest. Strange ancient symbols are engraved on its surface. It seems to require close inspection to see what's inside...",
+      "image_path": "assets/images/horror_chest.webp",
+      "audio_path": "assets/audio/horror_tension.mp3",
+      "sfx_path": null,
+      "effect": null,
+      "ar_config": {
+        "model_path": "assets/models/mystery_chest.glb",
+        "prompt_text": {
+          "ar": "ضع الصندوق الخشبي على سطح مستوٍ أمامك، ثم اضغط عليه مرتين لفتحه",
+          "en": "Place the wooden chest on a flat surface in front of you, then double-tap it to open"
+        },
+        "trigger_item": "rusty_key"
+      },
+      "choices": [
+        {
+          "text": "After finding the key, head to the main crypt door",
+          "target_node_id": "main_door",
+          "condition": {
+            "variable": "inventory",
+            "operator": "contains",
+            "value": "rusty_key"
+          },
+          "state_updates": null
+        },
+        {
+          "text": "Return to the center of the courtyard",
+          "target_node_id": "garden",
+          "condition": {
+            "variable": "inventory",
+            "operator": "not_contains",
+            "value": "rusty_key"
+          },
+          "state_updates": null
+        }
+      ]
+    },
+    "main_door": {
+      "id": "main_door",
+      "text": "You stand in front of the massive stone crypt door. A rusty brass lock prevents it from opening. It seems to require a specific key.",
+      "image_path": "assets/images/horror_door.webp",
+      "audio_path": "assets/audio/horror_tension.mp3",
+      "sfx_path": null,
+      "effect": null,
+      "choices": [
+        {
+          "text": "Unlock the door using the rusty key you found",
+          "target_node_id": "victory_escape",
+          "condition": {
+            "variable": "inventory",
+            "operator": "contains",
+            "value": "rusty_key"
+          },
+          "state_updates": null
+        },
+        {
+          "text": "The door is locked tight. Return to the courtyard and search for a way to open it",
+          "target_node_id": "garden",
+          "condition": {
+            "variable": "inventory",
+            "operator": "not_contains",
+            "value": "rusty_key"
+          },
+          "state_updates": [
+            { "variable": "fear", "operation": "add", "value": 10 }
+          ]
+        }
+      ]
+    },
+    "victory_escape": {
+      "id": "victory_escape",
+      "text": "The rusty key turns in the brass lock with difficulty and opens the door with a loud creak. You rush inside to discover a secret passage filled with golden treasures, closing the door behind you to escape the beasts lurking in the dark courtyard!",
+      "image_path": "assets/images/horror_victory.webp",
+      "audio_path": "assets/audio/victory_theme.mp3",
+      "sfx_path": "assets/audio/door_open.mp3",
+      "effect": null,
+      "is_ending": true,
+      "ending_title": "Smart Survivor",
+      "choices": []
+    },
+    "dark_trap": {
+      "id": "dark_trap",
+      "text": "Suddenly! Your flashlight dies, and a terrifying growling sound comes from behind the trees! Something is running towards you at immense speed in the pitch darkness!",
+      "image_path": "assets/images/horror_chase.webp",
+      "audio_path": "assets/audio/horror_chase.mp3",
+      "sfx_path": "assets/audio/monster_roar.mp3",
+      "effect": "shake",
+      "timer_seconds": 10,
+      "fallback_node_id": "game_over_caught",
+      "choices": [
+        {
+          "text": "Quickly jump to the right behind a large rock to hide",
+          "target_node_id": "hide_success",
+          "condition": null,
+          "state_updates": [
+            { "variable": "health", "operation": "subtract", "value": 10 },
+            { "variable": "fear", "operation": "add", "value": 20 }
+          ]
+        },
+        {
+          "text": "Run towards the iron gate to escape outside",
+          "target_node_id": "game_over_caught",
+          "condition": null,
+          "state_updates": null
+        }
+      ]
+    },
+    "hide_success": {
+      "id": "hide_success",
+      "text": "You hid behind the rock, your hands shaking. The terrifying creature passes right by the rock, breathing heavily, and then departs. You feel your heart beating so fast it could burst out of your chest! You must test your calm to continue the adventure...",
+      "image_path": "assets/images/horror_hide.webp",
+      "audio_path": "assets/audio/horror_tension.mp3",
+      "sfx_path": null,
+      "effect": null,
+      "choices": [
+        {
+          "text": "Try to take a deep breath, calm yourself, and continue in the courtyard",
+          "target_node_id": "garden",
+          "condition": null,
+          "state_updates": null
+        },
+        {
+          "text": "Panic takes over, and you run and scream!",
+          "target_node_id": "game_over_panic",
+          "condition": null,
+          "state_updates": null
+        }
+      ]
+    },
+    "game_over_caught": {
+      "id": "game_over_caught",
+      "text": "You weren't fast enough! The dark creature jumped on you from behind the trees and dragged you into the deep shadows... Your adventure ends here.",
+      "image_path": "assets/images/horror_death.webp",
+      "audio_path": "assets/audio/game_over_theme.mp3",
+      "sfx_path": "assets/audio/jumpscare.mp3",
+      "effect": "flash_red",
+      "is_ending": true,
+      "ending_title": "Victim of Shadows",
+      "choices": []
+    },
+    "game_over_panic": {
+      "id": "game_over_panic",
+      "text": "Panic took over and you started breathing heavily! The creature heard your shaky breath and turned around suddenly... Your adventure ends here.",
+      "image_path": "assets/images/horror_death.webp",
+      "audio_path": "assets/audio/game_over_theme.mp3",
+      "sfx_path": "assets/audio/jumpscare.mp3",
+      "effect": "flash_red",
+      "is_ending": true,
+      "ending_title": "Died of Fright",
+      "choices": []
+    }
+  }
+}

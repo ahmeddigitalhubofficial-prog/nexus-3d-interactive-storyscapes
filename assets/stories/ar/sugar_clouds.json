@@ -1,0 +1,347 @@
+{
+  "story_title": "أكاديمية غيوم السكر",
+  "start_node_id": "intro",
+  "nodes": {
+    "intro": {
+      "id": "intro",
+      "text": "أهلاً بيك يا بطل! إنت واقف دلوقتي على سحابة دافية وبلون بينك (وردي) معمولة من غزل البنات بطعم الفراولة. فجأة، بيطير ناحيتك صاحبك 'براد الشاي الطاير' وهو بيترعش ويقولك: 'يا خبر أبيض! النجمة الدهبية السحرية وقعت في وادي الفقاعات الرمادي، ولو ملحقناهاش، السحاب هيفقد كل ألوانه وطعمه اللذيذ!'",
+      "image_path": "assets/images/sugar_clouds_intro.webp",
+      "audio_path": "assets/audio/comedy_bgm.mp3",
+      "sfx_path": null,
+      "choices": [
+        {
+          "text": "الذهاب لمكتب المدير مارشميلو لطلب المساعدة",
+          "target_node_id": "marshmallow_office",
+          "state_updates": [
+            { "variable": "courage", "operation": "add", "value": 5 }
+          ]
+        },
+        {
+          "text": "الاتجاه مباشرة لطاحونة الهمس السحرية لمعرفة الطريق",
+          "target_node_id": "whispering_windmill",
+          "state_updates": [
+            { "variable": "imagination", "operation": "add", "value": 5 }
+          ]
+        }
+      ]
+    },
+    "marshmallow_office": {
+      "id": "marshmallow_office",
+      "text": "دخلت مكتب المدير مارشميلو الكبير أوي. كان لابس نضارة مدورة وباين عليه قلقان جداً. قالك بصوت بيترعش: 'يا واد يا شجاع إنت! خد العصاية السحرية دي صائدة النجوم، هتساعدك تشد أي حاجة بعيدة ليك. روح بسرعة وعدي نهر الشوكولاتة عشان توصل للوادي!'",
+      "image_path": "assets/images/sugar_clouds_intro.webp",
+      "audio_path": "assets/audio/comedy_bgm.mp3",
+      "sfx_path": "assets/audio/item_pickup.mp3",
+      "choices": [
+        {
+          "text": "خذ العصا وتوجه لنهر الشوكولاتة الساخن",
+          "target_node_id": "chocolate_river",
+          "state_updates": [
+            { "variable": "inventory", "operation": "add", "value": "star_catcher" }
+          ]
+        }
+      ]
+    },
+    "whispering_windmill": {
+      "id": "whispering_windmill",
+      "text": "طلعت لطاحونة الهمس السحرية. الهوا بيعمل لحن جميل أوي وهو بيصفر. وجنب التروس الهوا لقيت 'مفتاح الرياح الدهبي' اللامع. الهوا همس في ودنك وقال: 'الغابة السحرية قدامك، استخدم المفتاح عشان تشغل الدعسوقة (أبو العيد) الطائرة الآلية وتساعدك في طريقك!'",
+      "image_path": "assets/images/sugar_clouds_intro.webp",
+      "audio_path": "assets/audio/comedy_bgm.mp3",
+      "sfx_path": "assets/audio/item_pickup.mp3",
+      "choices": [
+        {
+          "text": "خذ المفتاح وتوجه إلى غابة السكاكر",
+          "target_node_id": "candy_forest",
+          "state_updates": [
+            { "variable": "inventory", "operation": "add", "value": "windup_key" }
+          ]
+        }
+      ]
+    },
+    "chocolate_river": {
+      "id": "chocolate_river",
+      "text": "وصلت لشط نهر الشوكولاتة. الشوكولاتة السخنة بتجري وبتعمل فقاقيع بني ريحتها تجنن! بس للأسف مفيش أي كوبري عشان تعدي للناحية التانية.",
+      "image_path": "assets/images/sugar_clouds_journey.webp",
+      "audio_path": "assets/audio/comedy_bgm.mp3",
+      "sfx_path": null,
+      "choices": [
+        {
+          "text": "استخدم عصا صيد النجوم لجذب قارب مارشميلو بعيد",
+          "target_node_id": "boat_success",
+          "condition": {
+            "variable": "inventory",
+            "operator": "contains",
+            "value": "star_catcher"
+          }
+        },
+        {
+          "text": "حاول بناء جسر من قطع البسكويت المتناثرة يدوياً",
+          "target_node_id": "bridge_puzzle"
+        }
+      ]
+    },
+    "boat_success": {
+      "id": "boat_success",
+      "text": "ركبت قارب المارشميلو الطري وبدأت تمشي بيه! وفجأة طلع لك حوت شوكولاتة طيب وطلع نافورة كاكاو ساقعة وجميلة! ضحك واداك 'لؤلؤة الأحلام المنورة' جايزة عشان شجاعتك.",
+      "image_path": "assets/images/sugar_clouds_journey.webp",
+      "audio_path": "assets/audio/comedy_bgm.mp3",
+      "sfx_path": "assets/audio/cheering.mp3",
+      "choices": [
+        {
+          "text": "أكمل طريقك نحو جبل غزل البنات",
+          "target_node_id": "cotton_candy_mountain",
+          "state_updates": [
+            { "variable": "inventory", "operation": "add", "value": "magic_pearl" }
+          ]
+        }
+      ]
+    },
+    "bridge_puzzle": {
+      "id": "bridge_puzzle",
+      "text": "يلا نبني الكوبري سوا! استخدم كاميرا الموبايل ودور في الأوضة وحط حتت البسكوت السحرية في مكانها عشان تعدي بأمان.",
+      "image_path": "assets/images/sugar_clouds_journey.webp",
+      "audio_path": "assets/audio/comedy_bgm.mp3",
+      "sfx_path": null,
+      "ar_config": {
+        "model_path": "assets/models/crate_comedy.glb",
+        "prompt_text": {
+          "ar": "حط لوح البسكوت على الأرض وكبره عشان تعدي عليه",
+          "en": "Place the biscuit plank on the floor and resize it to cross"
+        },
+        "trigger_item": "biscuit_shield"
+      },
+      "choices": [
+        {
+          "text": "اعبر الجسر الجديد بأمان",
+          "target_node_id": "cotton_candy_mountain",
+          "condition": {
+            "variable": "inventory",
+            "operator": "contains",
+            "value": "biscuit_shield"
+          }
+        }
+      ]
+    },
+    "candy_forest": {
+      "id": "candy_forest",
+      "text": "وصلت لغابة السكاكر والحلوى. الشجر معمول من المصاصات الطعمة وورق الشجر معمول من بونبوني النعناع! بس السكة مقفولة بفروع سكر داخلة في بعضها.",
+      "image_path": "assets/images/sugar_clouds_journey.webp",
+      "audio_path": "assets/audio/comedy_bgm.mp3",
+      "sfx_path": null,
+      "choices": [
+        {
+          "text": "استخدم المفتاح لتشغيل الدعسوقة الآلية والطيران فوق الأشجار",
+          "target_node_id": "ladybug_flight",
+          "condition": {
+            "variable": "inventory",
+            "operator": "contains",
+            "value": "windup_key"
+          }
+        },
+        {
+          "text": "اطلب الإذن بالمرور من ملك الدببة المطاطية المرح",
+          "target_node_id": "gummy_king"
+        }
+      ]
+    },
+    "ladybug_flight": {
+      "id": "ladybug_flight",
+      "text": "ركبت فوق الدعسوقة الآلية وطرت فوق الشجر البينك! ومن فوق خالص شفت فاكهة بتنور على قمة شجرة النعناع العالية. قطفتها براحة وحطيتها في شنطتك: 'ثمرة قوس قزح السحرية'!",
+      "image_path": "assets/images/sugar_clouds_journey.webp",
+      "audio_path": "assets/audio/comedy_bgm.mp3",
+      "sfx_path": "assets/audio/item_pickup.mp3",
+      "choices": [
+        {
+          "text": "اهبط بالدعسوقة عند سفح جبل غزل البنات",
+          "target_node_id": "cotton_candy_mountain",
+          "state_updates": [
+            { "variable": "inventory", "operation": "add", "value": "rainbow_fruit" }
+          ]
+        }
+      ]
+    },
+    "gummy_king": {
+      "id": "gummy_king",
+      "text": "ظهر لك ملك الدببة الجيلي (الجيلي كولا) الضخم والجميل. قال بصوت بيضحك وكله طيبة: 'يا هلا بالبطل الصغير! مش هسيبك تعدي غير لما تحل الفزورة دي: إيه الحاجة اللي بتكبر وبتبقى أحلى كل ما تشاركها مع أصحابك؟'",
+      "image_path": "assets/images/sugar_clouds_journey.webp",
+      "audio_path": "assets/audio/comedy_bgm.mp3",
+      "sfx_path": "assets/audio/scratch_head.mp3",
+      "choices": [
+        {
+          "text": "الإجابة هي: قطع السكاكر اللذيذة!",
+          "target_node_id": "gummy_retry"
+        },
+        {
+          "text": "الإجابة هي: الابتسامة والصداقة!",
+          "target_node_id": "gummy_success",
+          "state_updates": [
+            { "variable": "kindness", "operation": "add", "value": 20 }
+          ]
+        }
+      ]
+    },
+    "gummy_retry": {
+      "id": "gummy_retry",
+      "text": "الملك الدب قال وهو بيهز راسه ويضحك: 'لأ يا شاطر! الحلويات بتقل لما توزعها على غيرك، فكر تاني في حاجة مش بتخلص بل بتزيد!'",
+      "image_path": "assets/images/sugar_clouds_journey.webp",
+      "audio_path": "assets/audio/comedy_bgm.mp3",
+      "sfx_path": null,
+      "choices": [
+        {
+          "text": "حاول الإجابة مرة أخرى",
+          "target_node_id": "gummy_king"
+        }
+      ]
+    },
+    "gummy_success": {
+      "id": "gummy_success",
+      "text": "الملك الدب سقف بفرحة وقال: 'إجابة ذكية جداً! الابتسامة والصداقة هما الكنز الحقيقي!' وفتح لك البوابة السحرية واداك درع الحلوى عشان يحميك.",
+      "image_path": "assets/images/sugar_clouds_journey.webp",
+      "audio_path": "assets/audio/comedy_bgm.mp3",
+      "sfx_path": "assets/audio/cheering.mp3",
+      "choices": [
+        {
+          "text": "امضِ قدماً لنهر جبل غزل البنات",
+          "target_node_id": "cotton_candy_mountain",
+          "state_updates": [
+            { "variable": "inventory", "operation": "add", "value": "gummy_shield" }
+          ]
+        }
+      ]
+    },
+    "cotton_candy_mountain": {
+      "id": "cotton_candy_mountain",
+      "text": "قدامك دلوقتي قلعة السحاب الرمادي اللي فوق قمة جبل غزل البنات. القلعة حواليها حراس معمولين من بسكوت الزنجبيل اللذيز، بس هما نايمين وبيموتوا في النوم.",
+      "image_path": "assets/images/sugar_clouds_journey.webp",
+      "audio_path": "assets/audio/comedy_bgm.mp3",
+      "sfx_path": null,
+      "choices": [
+        {
+          "text": "حاول التسلل بهدوء وببطء من بين الحراس",
+          "target_node_id": "front_gate"
+        },
+        {
+          "text": "استخدم بوابة الفقاعات الصابونية السرية للدخول",
+          "target_node_id": "bubble_portal"
+        }
+      ]
+    },
+    "bubble_portal": {
+      "id": "bubble_portal",
+      "text": "البوابة مقفولة بفقاقيع صابون سحرية! وجه كاميرا الموبايل وفرقع الفقاقيع الملونة عشان تفتح الممر السري اللي بيودي لأوضة العرش.",
+      "image_path": "assets/images/sugar_clouds_journey.webp",
+      "audio_path": "assets/audio/comedy_bgm.mp3",
+      "sfx_path": null,
+      "ar_config": {
+        "model_path": "assets/models/crate_comedy.glb",
+        "prompt_text": {
+          "ar": "فرقع فقاعة الصابون الدهبية السحرية بلمسة واحدة عشان تفتح الباب",
+          "en": "Pop the magic golden bubble by tapping it to unlock the door"
+        },
+        "trigger_item": "bubble_key"
+      },
+      "choices": [
+        {
+          "text": "ادخل غرفة العرش بعد فرقعة الفقاعات",
+          "target_node_id": "core_room",
+          "condition": {
+            "variable": "inventory",
+            "operator": "contains",
+            "value": "bubble_key"
+          }
+        }
+      ]
+    },
+    "front_gate": {
+      "id": "front_gate",
+      "text": "الحراس بيتحركوا وهم نايمين وممكن يصحوا في أي ثانية! لازم تعدي الكوبري الضيق ده بسرعة ومن غير أي صوت قبل ما الوقت يخلص!",
+      "image_path": "assets/images/sugar_clouds_journey.webp",
+      "audio_path": "assets/audio/comedy_bgm.mp3",
+      "sfx_path": null,
+      "timer_seconds": 8,
+      "fallback_node_id": "captured_party",
+      "choices": [
+        {
+          "text": "تسلل بسرعة وخفة فوق الجسر الهش",
+          "target_node_id": "core_room"
+        }
+      ]
+    },
+    "core_room": {
+      "id": "core_room",
+      "text": "دخلت أوضة العرش الضلمة. وفي النص لقيت السحابة الرمادي الصغيرة قاعدة لوحدها وبتعيط، والنجمة الدهبية السحرية طافية ومحشورة بين قرونه. قال وهو بيعيط: 'أنا مش شرير... أنا بس زعلان ولوحدي ومحدش عايز يلعب معايا عشان لوني رمادي ومطفي!'",
+      "image_path": "assets/images/sugar_clouds_victory.webp",
+      "audio_path": "assets/audio/comedy_bgm.mp3",
+      "sfx_path": "assets/audio/crowd_disapprove.mp3",
+      "choices": [
+        {
+          "text": "قدم له هدية سحرية مضيئة (لؤلؤة الأحلام أو ثمرة قوس قزح)",
+          "target_node_id": "perfect_ending",
+          "condition": {
+            "variable": "inventory",
+            "operator": "contains",
+            "value": "magic_pearl"
+          }
+        },
+        {
+          "text": "قدم له هدية سحرية مضيئة (لؤلؤة الأحلام أو ثمرة قوس قزح)",
+          "target_node_id": "perfect_ending",
+          "condition": {
+            "variable": "inventory",
+            "operator": "contains",
+            "value": "rainbow_fruit"
+          }
+        },
+        {
+          "text": "عانقه بحنان وأخبره أنك ستصبح صديقه اللطيف من اليوم",
+          "target_node_id": "hug_ending",
+          "state_updates": [
+            { "variable": "kindness", "operation": "add", "value": 15 }
+          ]
+        },
+        {
+          "text": "أخبره بنكتة مضحكة ومرحة لترسم الابتسامة على وجهه",
+          "target_node_id": "joke_ending",
+          "state_updates": [
+            { "variable": "imagination", "operation": "add", "value": 15 }
+          ]
+        }
+      ]
+    },
+    "perfect_ending": {
+      "id": "perfect_ending",
+      "text": "أول ما اديته الهدية السحرية اللي بتنور، فرح جداً والنجمة السحرية نورت فجأة بألوان قوس قزح الجميلة! السحاب الرمادي اتحول لسحابة بيضا ناعمة بتضحك ومبسوطة، والألوان الحلوة رجعت لأكاديمية غيوم السكر. وكل الناس توجتك بطل قوس قزح الأبدي!",
+      "image_path": "assets/images/sugar_clouds_victory.webp",
+      "audio_path": "assets/audio/victory_theme.mp3",
+      "sfx_path": "assets/audio/angelic_choir.mp3",
+      "is_ending": true,
+      "ending_title": "حارس قوس قزح الأبدي"
+    },
+    "hug_ending": {
+      "id": "hug_ending",
+      "text": "حضنت السحابة الرمادي الطرية. حس بالدفء وبدأ يعيط دموع ملونة اتحولت لفراشات بتطير! الألوان رجعت للنجمة الدهبية، والسحابة وعدتك تكون سحابة بيضا طيبة وتلعب مع الأطفال على طول. النهاية: صداقة السحاب الدافئة",
+      "image_path": "assets/images/sugar_clouds_victory.webp",
+      "audio_path": "assets/audio/victory_theme.mp3",
+      "sfx_path": "assets/audio/cheering.mp3",
+      "is_ending": true,
+      "ending_title": "صداقة السحاب الدافئة"
+    },
+    "joke_ending": {
+      "id": "joke_ending",
+      "text": "قولتله نكتة تضحك عن البسكوت والشوكولاتة. السحاب مات على روحه من الضحك، ومع ضحكاته بدأت تنزل حلويات ملونة في كل القلعة! النجمة السحرية نورت من جديد والسحاب بقى صاحب كل سكان غيوم السكر. النهاية: ضحكة قوس قزح اللذيذة",
+      "image_path": "assets/images/sugar_clouds_victory.webp",
+      "audio_path": "assets/audio/victory_theme.mp3",
+      "sfx_path": "assets/audio/cheering.mp3",
+      "is_ending": true,
+      "ending_title": "ضحكة قوس قزح اللذيذة"
+    },
+    "captured_party": {
+      "id": "captured_party",
+      "text": "حراس البسكوت صحيوا فجأة ومسكوك! دخلت القلعة وإنت خايف، بس فجأة كله صرخ وقال: 'مفاجأة!' وطلع السحاب الرمادي بيجهز حفلة عيد ميلاد سرية بس كان مكسوف يعزم حد. كله فرح بوجودك وادوك النجمة الدهبية بكل سرور عشان تحتفلوا سوا! النهاية: حفلة السحاب الكبرى",
+      "image_path": "assets/images/sugar_clouds_victory.webp",
+      "audio_path": "assets/audio/victory_theme.mp3",
+      "sfx_path": "assets/audio/cheering.mp3",
+      "is_ending": true,
+      "ending_title": "حفلة السحاب الكبرى"
+    }
+  }
+}

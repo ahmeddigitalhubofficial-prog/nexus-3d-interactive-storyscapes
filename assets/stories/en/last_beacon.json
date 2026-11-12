@@ -1,0 +1,101 @@
+{
+  "story_title": "The Last Beacon",
+  "start_node_id": "intro",
+  "nodes": {
+    "intro": {
+      "id": "intro",
+      "text": "Sub-zero winds howl across the frozen wasteland. Station Alpha's colossal light beacon flickers violently under a emerald aurora. As the head beacon engineer, you step off your arctic snow-crawler. Cold-seeking shadow creatures prowl beyond the beam's edge.",
+      "image_path": "assets/images/beacon_cover.webp",
+      "audio_path": "assets/audio/chrono_ambient.mp3",
+      "sfx_path": null,
+      "effect": null,
+      "choices": [
+        {
+          "text": "Climb the ice-slicked beacon tower to repair the fusion igniter",
+          "target_node_id": "beacon_tower",
+          "condition": null,
+          "state_updates": null
+        },
+        {
+          "text": "Investigate the sound sensor array near the snow-crawler",
+          "target_node_id": "sensor_array",
+          "condition": null,
+          "state_updates": null
+        }
+      ]
+    },
+    "sensor_array": {
+      "id": "sensor_array",
+      "text": "You recalibrate the sound sensors, acquiring an Acoustic Flare Launcher that drives away shadow creatures with sonic pulses.",
+      "image_path": "assets/images/horror_wall.webp",
+      "audio_path": "assets/audio/chrono_ambient.mp3",
+      "sfx_path": "assets/audio/item_pickup.mp3",
+      "effect": null,
+      "choices": [
+        {
+          "text": "Take the Acoustic Flare Launcher and climb the beacon tower",
+          "target_node_id": "beacon_tower",
+          "condition": null,
+          "state_updates": [
+            { "variable": "inventory", "operation": "add", "value": "acoustic_flare" }
+          ]
+        }
+      ]
+    },
+    "beacon_tower": {
+      "id": "beacon_tower",
+      "text": "At the apex of the tower, the beacon core dies. Total darkness encroaches. Shadows swarm up the scaffolding. A signal arrives from the main colony: 'Sustain the beam or humanity freezes.'",
+      "image_path": "assets/images/beacon_cover.webp",
+      "audio_path": "assets/audio/chrono_alarm.mp3",
+      "sfx_path": null,
+      "effect": "flash_red",
+      "choices": [
+        {
+          "text": "Deploy Acoustic Flare Launcher to repel the shadow swarms while fixing the igniter",
+          "target_node_id": "ending_dawn",
+          "condition": { "variable": "inventory", "operator": "contains", "value": "acoustic_flare" },
+          "state_updates": null
+        },
+        {
+          "text": "Overclock your snow-crawler's battery directly into the tower mainframe",
+          "target_node_id": "ending_silence",
+          "condition": null,
+          "state_updates": null
+        },
+        {
+          "text": "Abandon the tower and drive into the frozen dark seeking shelter",
+          "target_node_id": "ending_lost",
+          "condition": null,
+          "state_updates": null
+        }
+      ]
+    },
+    "ending_dawn": {
+      "id": "ending_dawn",
+      "text": "ENDING 1: ETERNAL DAWN\nThe acoustic flare repels the monsters just long enough for you to fix the fusion igniter. A pillar of brilliant warm light pierces the sky, restoring power and warmth to all surviving human colonies.",
+      "image_path": "assets/images/beacon_cover.webp",
+      "audio_path": "assets/audio/victory_theme.mp3",
+      "sfx_path": null,
+      "effect": "flash_gold",
+      "choices": []
+    },
+    "ending_silence": {
+      "id": "ending_silence",
+      "text": "ENDING 2: FROZEN SILENCE\nThe battery overclock ignites a permanent self-sustaining light nova, saving the colony, but freezing your crawler and sealing your heroic legacy in ice.",
+      "image_path": "assets/images/horror_wall.webp",
+      "audio_path": "assets/audio/sad_theme.mp3",
+      "sfx_path": null,
+      "effect": "flash_white",
+      "choices": []
+    },
+    "ending_lost": {
+      "id": "ending_lost",
+      "text": "ENDING 3: SIGNAL LOST\nThe beacon dies out completely. Darkness swallows Station Alpha as you drift into the endless tundra, leaving humanity's fate uncertain.",
+      "image_path": "assets/images/horror_gate.webp",
+      "audio_path": "assets/audio/mystery_theme.mp3",
+      "sfx_path": null,
+      "effect": "flash_red",
+      "choices": []
+    }
+  }
+}

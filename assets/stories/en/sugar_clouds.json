@@ -1,0 +1,347 @@
+{
+  "story_title": "Sugar Cloud Academy",
+  "start_node_id": "intro",
+  "nodes": {
+    "intro": {
+      "id": "intro",
+      "text": "Welcome, hero! You are standing on a warm pink cotton candy cloud. Suddenly, your friend 'Flying Teapot' zooms over, shaking, and says: 'Oh no! The magical Rainbow Star fell into the Gray Bubble Valley! If we don't save it, the clouds will lose their colors and sweetness forever!'",
+      "image_path": "assets/images/sugar_clouds_intro.webp",
+      "audio_path": "assets/audio/comedy_bgm.mp3",
+      "sfx_path": null,
+      "choices": [
+        {
+          "text": "Go to Principal Marshmallow's office for help",
+          "target_node_id": "marshmallow_office",
+          "state_updates": [
+            { "variable": "courage", "operation": "add", "value": 5 }
+          ]
+        },
+        {
+          "text": "Go directly to the Whispering Windmill for directions",
+          "target_node_id": "whispering_windmill",
+          "state_updates": [
+            { "variable": "imagination", "operation": "add", "value": 5 }
+          ]
+        }
+      ]
+    },
+    "marshmallow_office": {
+      "id": "marshmallow_office",
+      "text": "You enter Principal Marshmallow's giant office. He wears round glasses and looks very worried. He says: 'How brave of you! Take this magical Star Catcher wand. It will help you pull far objects closer. Go, and cross the Chocolate River to reach the valley!'",
+      "image_path": "assets/images/sugar_clouds_intro.webp",
+      "audio_path": "assets/audio/comedy_bgm.mp3",
+      "sfx_path": "assets/audio/item_pickup.mp3",
+      "choices": [
+        {
+          "text": "Take the wand and head to the hot Chocolate River",
+          "target_node_id": "chocolate_river",
+          "state_updates": [
+            { "variable": "inventory", "operation": "add", "value": "star_catcher" }
+          ]
+        }
+      ]
+    },
+    "whispering_windmill": {
+      "id": "whispering_windmill",
+      "text": "You climb the Whispering Windmill. The wind whistles a sweet melody. Next to the gears, you find a shiny 'Gold Windup Key'. The wind whispers: 'The magic forest lies ahead. Use this key to power the mechanical ladybug and fly over!'",
+      "image_path": "assets/images/sugar_clouds_intro.webp",
+      "audio_path": "assets/audio/comedy_bgm.mp3",
+      "sfx_path": "assets/audio/item_pickup.mp3",
+      "choices": [
+        {
+          "text": "Take the key and head to the Candy Forest",
+          "target_node_id": "candy_forest",
+          "state_updates": [
+            { "variable": "inventory", "operation": "add", "value": "windup_key" }
+          ]
+        }
+      ]
+    },
+    "chocolate_river": {
+      "id": "chocolate_river",
+      "text": "You arrive at the Chocolate River. Delicious hot chocolate flows, making sweet brown bubbles! But there is no bridge to cross.",
+      "image_path": "assets/images/sugar_clouds_journey.webp",
+      "audio_path": "assets/audio/comedy_bgm.mp3",
+      "sfx_path": null,
+      "choices": [
+        {
+          "text": "Use the Star Catcher to pull a marshmallow boat closer",
+          "target_node_id": "boat_success",
+          "condition": {
+            "variable": "inventory",
+            "operator": "contains",
+            "value": "star_catcher"
+          }
+        },
+        {
+          "text": "Try to build a bridge out of scattered biscuit planks",
+          "target_node_id": "bridge_puzzle"
+        }
+      ]
+    },
+    "boat_success": {
+      "id": "boat_success",
+      "text": "You sail smoothly on the soft marshmallow boat! Suddenly, a friendly chocolate whale appears and blows a cold cocoa fountain! The whale laughs and gifts you a glowing 'Magic Pearl' for your bravery.",
+      "image_path": "assets/images/sugar_clouds_journey.webp",
+      "audio_path": "assets/audio/comedy_bgm.mp3",
+      "sfx_path": "assets/audio/cheering.mp3",
+      "choices": [
+        {
+          "text": "Continue sailing towards Cotton Candy Mountain",
+          "target_node_id": "cotton_candy_mountain",
+          "state_updates": [
+            { "variable": "inventory", "operation": "add", "value": "magic_pearl" }
+          ]
+        }
+      ]
+    },
+    "bridge_puzzle": {
+      "id": "bridge_puzzle",
+      "text": "Let's build a bridge! Use your camera to scan the room and place the magic biscuit blocks to cross safely.",
+      "image_path": "assets/images/sugar_clouds_journey.webp",
+      "audio_path": "assets/audio/comedy_bgm.mp3",
+      "sfx_path": null,
+      "ar_config": {
+        "model_path": "assets/models/crate_comedy.glb",
+        "prompt_text": {
+          "ar": "ضع لوح البسكويت على الأرض وقم بتكبيره للمرور",
+          "en": "Place the biscuit plank on the floor and resize it to cross"
+        },
+        "trigger_item": "biscuit_shield"
+      },
+      "choices": [
+        {
+          "text": "Cross the biscuit bridge safely",
+          "target_node_id": "cotton_candy_mountain",
+          "condition": {
+            "variable": "inventory",
+            "operator": "contains",
+            "value": "biscuit_shield"
+          }
+        }
+      ]
+    },
+    "candy_forest": {
+      "id": "candy_forest",
+      "text": "You enter the Candy Forest. The trees are made of giant lollipops, and the leaves are sweet peppermint! But the path is blocked by thick sugary branches.",
+      "image_path": "assets/images/sugar_clouds_journey.webp",
+      "audio_path": "assets/audio/comedy_bgm.mp3",
+      "sfx_path": null,
+      "choices": [
+        {
+          "text": "Use the key to fly over on the mechanical ladybug",
+          "target_node_id": "ladybug_flight",
+          "condition": {
+            "variable": "inventory",
+            "operator": "contains",
+            "value": "windup_key"
+          }
+        },
+        {
+          "text": "Ask the Gummy Bear King for permission to pass",
+          "target_node_id": "gummy_king"
+        }
+      ]
+    },
+    "ladybug_flight": {
+      "id": "ladybug_flight",
+      "text": "You ride the mechanical ladybug high above the pink trees! From the sky, you spot a glowing fruit on a peppermint branch. You pick it carefully: it's a 'Rainbow Fruit'!",
+      "image_path": "assets/images/sugar_clouds_journey.webp",
+      "audio_path": "assets/audio/comedy_bgm.mp3",
+      "sfx_path": "assets/audio/item_pickup.mp3",
+      "choices": [
+        {
+          "text": "Land the ladybug at the foot of Cotton Candy Mountain",
+          "target_node_id": "cotton_candy_mountain",
+          "state_updates": [
+            { "variable": "inventory", "operation": "add", "value": "rainbow_fruit" }
+          ]
+        }
+      ]
+    },
+    "gummy_king": {
+      "id": "gummy_king",
+      "text": "The giant, friendly Gummy Bear King blocks your way. He chuckles: 'Hello little hero! I will let you pass only if you solve my riddle: What is the one thing that becomes bigger and sweeter the more you share it with friends?'",
+      "image_path": "assets/images/sugar_clouds_journey.webp",
+      "audio_path": "assets/audio/comedy_bgm.mp3",
+      "sfx_path": "assets/audio/scratch_head.mp3",
+      "choices": [
+        {
+          "text": "The answer is: Delicious candies!",
+          "target_node_id": "gummy_retry"
+        },
+        {
+          "text": "The answer is: A smile and friendship!",
+          "target_node_id": "gummy_success",
+          "state_updates": [
+            { "variable": "kindness", "operation": "add", "value": 20 }
+          ]
+        }
+      ]
+    },
+    "gummy_retry": {
+      "id": "gummy_retry",
+      "text": "The King shakes his head with a smile: 'No, little adventurer! Candies run out when shared. Think of something magical that never shrinks but grows!'",
+      "image_path": "assets/images/sugar_clouds_journey.webp",
+      "audio_path": "assets/audio/comedy_bgm.mp3",
+      "sfx_path": null,
+      "choices": [
+        {
+          "text": "Try to answer again",
+          "target_node_id": "gummy_king"
+        }
+      ]
+    },
+    "gummy_success": {
+      "id": "gummy_success",
+      "text": "The King claps happily: 'Brilliant! A smile and friendship are the ultimate treasure!' He opens the path and hands you a gummy shield to protect you.",
+      "image_path": "assets/images/sugar_clouds_journey.webp",
+      "audio_path": "assets/audio/comedy_bgm.mp3",
+      "sfx_path": "assets/audio/cheering.mp3",
+      "choices": [
+        {
+          "text": "Go forward to Cotton Candy Mountain",
+          "target_node_id": "cotton_candy_mountain",
+          "state_updates": [
+            { "variable": "inventory", "operation": "add", "value": "gummy_shield" }
+          ]
+        }
+      ]
+    },
+    "cotton_candy_mountain": {
+      "id": "cotton_candy_mountain",
+      "text": "Ahead stands the Gray Cloud Castle atop Cotton Candy Mountain. It is guarded by sleeping gingerbread cookie soldiers.",
+      "image_path": "assets/images/sugar_clouds_journey.webp",
+      "audio_path": "assets/audio/comedy_bgm.mp3",
+      "sfx_path": null,
+      "choices": [
+        {
+          "text": "Try to sneak quietly past the sleeping guards",
+          "target_node_id": "front_gate"
+        },
+        {
+          "text": "Use the secret Bubble Portal to enter",
+          "target_node_id": "bubble_portal"
+        }
+      ]
+    },
+    "bubble_portal": {
+      "id": "bubble_portal",
+      "text": "The portal is locked by magic bubbles! Use your camera to pop the correct bubble and open the secret entrance to the castle.",
+      "image_path": "assets/images/sugar_clouds_journey.webp",
+      "audio_path": "assets/audio/comedy_bgm.mp3",
+      "sfx_path": null,
+      "ar_config": {
+        "model_path": "assets/models/crate_comedy.glb",
+        "prompt_text": {
+          "ar": "فرقع الفقاعة الذهبية السحرية بلمسها لفتح الباب",
+          "en": "Pop the magic golden bubble by tapping it to unlock the door"
+        },
+        "trigger_item": "bubble_key"
+      },
+      "choices": [
+        {
+          "text": "Enter the throne room after popping the bubbles",
+          "target_node_id": "core_room",
+          "condition": {
+            "variable": "inventory",
+            "operator": "contains",
+            "value": "bubble_key"
+          }
+        }
+      ]
+    },
+    "front_gate": {
+      "id": "front_gate",
+      "text": "The gingerbread guards are moving in their sleep! You must cross the bridge quickly and quietly before they wake up! You have 8 seconds!",
+      "image_path": "assets/images/sugar_clouds_journey.webp",
+      "audio_path": "assets/audio/comedy_bgm.mp3",
+      "sfx_path": null,
+      "timer_seconds": 8,
+      "fallback_node_id": "captured_party",
+      "choices": [
+        {
+          "text": "Sneak quickly over the fragile bridge",
+          "target_node_id": "core_room"
+        }
+      ]
+    },
+    "core_room": {
+      "id": "core_room",
+      "text": "You enter the dark throne room. In the center sits the lonely Gray Cloud, crying. The Rainbow Star is stuck on his head, completely dark. He weeps: 'I am not bad... I am just lonely, and nobody wants to play with me because I am gray!'",
+      "image_path": "assets/images/sugar_clouds_victory.webp",
+      "audio_path": "assets/audio/comedy_bgm.mp3",
+      "sfx_path": "assets/audio/crowd_disapprove.mp3",
+      "choices": [
+        {
+          "text": "Give him the glowing Magic Pearl from your bag",
+          "target_node_id": "perfect_ending",
+          "condition": {
+            "variable": "inventory",
+            "operator": "contains",
+            "value": "magic_pearl"
+          }
+        },
+        {
+          "text": "Give him the glowing Rainbow Fruit from your bag",
+          "target_node_id": "perfect_ending",
+          "condition": {
+            "variable": "inventory",
+            "operator": "contains",
+            "value": "rainbow_fruit"
+          }
+        },
+        {
+          "text": "Give him a warm hug and offer to be his best friend",
+          "target_node_id": "hug_ending",
+          "state_updates": [
+            { "variable": "kindness", "operation": "add", "value": 15 }
+          ]
+        },
+        {
+          "text": "Tell him a funny joke to make him laugh",
+          "target_node_id": "joke_ending",
+          "state_updates": [
+            { "variable": "imagination", "operation": "add", "value": 15 }
+          ]
+        }
+      ]
+    },
+    "perfect_ending": {
+      "id": "perfect_ending",
+      "text": "When you hand him the glowing magical gift, he gasps with joy, and the star shines bright with rainbow colors! The Gray Cloud transforms into a happy white cloud. Sweet colors return to the academy, and you are crowned the Rainbow Guardian!",
+      "image_path": "assets/images/sugar_clouds_victory.webp",
+      "audio_path": "assets/audio/victory_theme.mp3",
+      "sfx_path": "assets/audio/open_box.mp3",
+      "is_ending": true,
+      "ending_title": "Rainbow Guardian"
+    },
+    "hug_ending": {
+      "id": "hug_ending",
+      "text": "You hug the soft Gray Cloud. He feels warm and begins to cry colorful tears that turn into flying butterflies! The star glows, and he promises to be a friendly white cloud forever. Ending: Warm Cloud Friendship",
+      "image_path": "assets/images/sugar_clouds_victory.webp",
+      "audio_path": "assets/audio/victory_theme.mp3",
+      "sfx_path": "assets/audio/cheering.mp3",
+      "is_ending": true,
+      "ending_title": "Warm Cloud Friendship"
+    },
+    "joke_ending": {
+      "id": "joke_ending",
+      "text": "You tell a funny joke about biscuits and chocolate. The cloud bursts into laughter, raining colorful candies everywhere! The star lights up, and he reconciles with everyone. Ending: Rainbow Laughter",
+      "image_path": "assets/images/sugar_clouds_victory.webp",
+      "audio_path": "assets/audio/victory_theme.mp3",
+      "sfx_path": "assets/audio/cheering.mp3",
+      "is_ending": true,
+      "ending_title": "Rainbow Laughter"
+    },
+    "captured_party": {
+      "id": "captured_party",
+      "text": "The gingerbread guards wake up and catch you! You enter the castle scared, but suddenly they shout: 'Surprise!' It turns out the Gray Cloud was preparing a surprise birthday party but was too shy to invite anyone. He returns the star with joy! Ending: The Great Cloud Party",
+      "image_path": "assets/images/sugar_clouds_victory.webp",
+      "audio_path": "assets/audio/victory_theme.mp3",
+      "sfx_path": "assets/audio/cheering.mp3",
+      "is_ending": true,
+      "ending_title": "The Great Cloud Party"
+    }
+  }
+}

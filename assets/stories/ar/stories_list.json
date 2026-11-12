@@ -1,0 +1,88 @@
+[
+  {
+    "id": "chrono_core",
+    "title": "Chrono-Core: أصداء بروميثيوس",
+    "description": "تتقل بين عامي 2088 و 2140 في الوقت الفعلي داخل محطة فضائية منهارة لمنع كارثة انقراض زمنية.",
+    "genre": "خيال علمي وتنقل زمني 3D",
+    "cover_image": "assets/images/chrono_cover.webp",
+    "age_rating": "16+",
+    "difficulty": "صعب",
+    "is_3d": true
+  },
+  {
+    "id": "abyssal_archive",
+    "title": "سرداب الأسرار: الأرشيف السحيق",
+    "description": "استكشف سراديب مظلمة تتغير هندستها تحت أوروبا الفيكتورية حيث يتطلب كل باب مفتوح تضحية بمظلمة.",
+    "genre": "رعب غوطي مظلم 3D",
+    "cover_image": "assets/images/abyssal_cover.webp",
+    "age_rating": "18+",
+    "difficulty": "صعب",
+    "is_3d": true
+  },
+  {
+    "id": "neon_phantom",
+    "title": "شبح النيون: طوكيو 2099",
+    "description": "ادخل داخل ذكريات ثلاثية الأبعاد هولوغرافية لضحايا الجرائم لتعديل أدلة الماضي وكشف القاتل السيبراني.",
+    "genre": "تحقيق سايبربانك 3D",
+    "cover_image": "assets/images/neon_cover.webp",
+    "age_rating": "16+",
+    "difficulty": "متوسط",
+    "is_3d": true
+  },
+  {
+    "id": "last_beacon",
+    "title": "المنارة الأخيرة",
+    "description": "اعبر عالماً متجمداً من الظلام الكوني لإصلاح منارات الضوء العملاقة التي تحمي البشرية من صيادي الظلال.",
+    "genre": "بقاء وعوالم مظلمة 3D",
+    "cover_image": "assets/images/beacon_cover.webp",
+    "age_rating": "12+",
+    "difficulty": "متوسط",
+    "is_3d": true
+  },
+  {
+    "id": "valkyrie_down",
+    "title": "سقوط الفالكيري: أطلال أسجارد",
+    "description": "اصطدم بكوكب أسطوري تُعبد فيه الذكاءات الاصطناعية القديمة كآلهة نوردية. فكك الرموز الفضائية للبقاء.",
+    "genre": "أكشن نوردي خيال علمي 3D",
+    "cover_image": "assets/images/valkyrie_cover.webp",
+    "age_rating": "16+",
+    "difficulty": "صعب",
+    "is_3d": true
+  },
+  {
+    "id": "horror_crypt",
+    "title": "سرداب الأسرار (التقليدية)",
+    "description": "تجد نفسك محبوساً في سرداب عائلي قديم، وعليك كشف الألغاز للخروج قبل نفاد بطارية كشافك.",
+    "genre": "رعب وتشويق",
+    "cover_image": "assets/images/horror_cover.webp",
+    "age_rating": "16+",
+    "difficulty": "صعب"
+  },
+  {
+    "id": "comedy_treasure",
+    "title": "رحلة الكنز... بالخطأ!",
+    "description": "مغامرة كوميدية لقرصان فاشل يجد خريطة كنز قديمة يكتشف لاحقاً أنها مجرد قائمة مشتريات لملك قديم.",
+    "genre": "كوميدي ومغامرة",
+    "cover_image": "assets/images/comedy_cover.webp",
+    "age_rating": "الجميع",
+    "difficulty": "سهل"
+  },
+  {
+    "id": "history_timetravel",
+    "title": "حارس بوابة الزمن",
+    "description": "تتعطل آلتك الزمنية وتجد نفسك في مصر القديمة في عهد بناء الأهرامات.",
+    "genre": "تاريخي وخيال",
+    "cover_image": "assets/images/history_cover.webp",
+    "age_rating": "12+",
+    "difficulty": "متوسط"
+  },
+  {
+    "id": "sugar_clouds",
+    "title": "أكاديمية غيوم السكر",
+    "description": "مغامرة خيالية ساحرة لمساعدة براد الشاي والتنين مشمش لإعادة الألوان السحرية لغيوم غزل البنات.",
+    "genre": "أطفال وخيال",
+    "cover_image": "assets/images/sugar_clouds_cover.webp",
+    "age_rating": "الجميع",
+    "difficulty": "سهل جداً"
+  }
+]

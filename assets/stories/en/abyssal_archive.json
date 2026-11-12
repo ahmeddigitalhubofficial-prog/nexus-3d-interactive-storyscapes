@@ -1,0 +1,101 @@
+{
+  "story_title": "Crypt of Secrets: The Abyssal Archive",
+  "start_node_id": "intro",
+  "nodes": {
+    "intro": {
+      "id": "intro",
+      "text": "Deep beneath Victorian Prague lies the Abyssal Archive. Damp stone walls absorb the flickering glow of your brass lantern. Iron doors line the catacombs, each carved with ancient Latin runes demanding a secret to open.",
+      "image_path": "assets/images/abyssal_cover.webp",
+      "audio_path": "assets/audio/horror_ambient.mp3",
+      "sfx_path": null,
+      "effect": null,
+      "choices": [
+        {
+          "text": "Examine the Obsidian Door demanding a confession of guilt",
+          "target_node_id": "obsidian_door",
+          "condition": null,
+          "state_updates": null
+        },
+        {
+          "text": "Search the bone-strewn altar room for a hidden key",
+          "target_node_id": "altar_room",
+          "condition": null,
+          "state_updates": null
+        }
+      ]
+    },
+    "altar_room": {
+      "id": "altar_room",
+      "text": "Among skull-lined niches, you discover a bloodstone medallion engraved with the symbol of the Archive Order.",
+      "image_path": "assets/images/horror_wall.webp",
+      "audio_path": "assets/audio/horror_ambient.mp3",
+      "sfx_path": "assets/audio/item_pickup.mp3",
+      "effect": null,
+      "choices": [
+        {
+          "text": "Place the bloodstone medallion upon the Obsidian Door",
+          "target_node_id": "obsidian_door",
+          "condition": null,
+          "state_updates": [
+            { "variable": "inventory", "operation": "add", "value": "bloodstone_medallion" }
+          ]
+        }
+      ]
+    },
+    "obsidian_door": {
+      "id": "obsidian_door",
+      "text": "The Obsidian Door groans open, revealing a chamber containing the Tomb of the Unbroken Shadow. Whispers fill your mind, offering ultimate arcane knowledge in exchange for releasing the sealed entity.",
+      "image_path": "assets/images/horror_gate.webp",
+      "audio_path": "assets/audio/horror_ambient.mp3",
+      "sfx_path": "assets/audio/gate_open.mp3",
+      "effect": "flash_red",
+      "choices": [
+        {
+          "text": "Sacrifice your medallion to permanently seal the entity underground",
+          "target_node_id": "ending_bury",
+          "condition": { "variable": "inventory", "operator": "contains", "value": "bloodstone_medallion" },
+          "state_updates": null
+        },
+        {
+          "text": "Break the tomb seals to unearth the ancient entity",
+          "target_node_id": "ending_unearth",
+          "condition": null,
+          "state_updates": null
+        },
+        {
+          "text": "Flee through the secret drainage shaft back to the city surface",
+          "target_node_id": "ending_escape",
+          "condition": null,
+          "state_updates": null
+        }
+      ]
+    },
+    "ending_bury": {
+      "id": "ending_bury",
+      "text": "ENDING 1: BURY THE TRUTH\nYou smash the bloodstone medallion, triggering a massive cave-in. The Abyssal Archive collapses beneath tons of rock, ensuring its ancient horror remains buried forever.",
+      "image_path": "assets/images/abyssal_cover.webp",
+      "audio_path": "assets/audio/victory_theme.mp3",
+      "sfx_path": null,
+      "effect": "flash_green",
+      "choices": []
+    },
+    "ending_unearth": {
+      "id": "ending_unearth",
+      "text": "ENDING 2: UNEARTH THE ENTITY\nThe seals shatter. Tendrils of shadow engulf the catacombs as the ancient entity awakens, bestowing terrifying dark powers upon you as its vessel.",
+      "image_path": "assets/images/horror_gate.webp",
+      "audio_path": "assets/audio/mystery_theme.mp3",
+      "sfx_path": null,
+      "effect": "flash_red",
+      "choices": []
+    },
+    "ending_escape": {
+      "id": "ending_escape",
+      "text": "ENDING 3: ESCAPE THE CRYPT\nYou crawl through dark sewer passages and burst out onto the moonlit cobblestones of Prague. You survived, but the catacomb whispers will haunt your dreams till the end of your days.",
+      "image_path": "assets/images/horror_wall.webp",
+      "audio_path": "assets/audio/sad_theme.mp3",
+      "sfx_path": null,
+      "effect": null,
+      "choices": []
+    }
+  }
+}

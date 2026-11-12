@@ -1,0 +1,183 @@
+{
+  "story_title": "Chrono-Core: The Echo of Prometheus",
+  "start_node_id": "intro",
+  "nodes": {
+    "intro": {
+      "id": "intro",
+      "text": "Aboard Orbital Station Prometheus, 2140. Red emergency lights strobe against cold, shattered hull plates. Your Chrono-Anchor glove pulses on your right arm. Before you lies the broken Quantum Core — and a temporal rift shimmering with light from 2088.",
+      "image_path": "assets/images/chrono_cover.webp",
+      "audio_path": "assets/audio/chrono_ambient.mp3",
+      "sfx_path": null,
+      "effect": "time_rift_blue",
+      "choices": [
+        {
+          "text": "Activate Chrono-Anchor and step into the 2088 timeline",
+          "target_node_id": "past_core_room",
+          "condition": null,
+          "state_updates": [
+            { "variable": "timeline", "operation": "set", "value": "2088" },
+            { "variable": "chrono_charge", "operation": "set", "value": 100 }
+          ]
+        },
+        {
+          "text": "Investigate the 2140 ruined control terminal first",
+          "target_node_id": "ruined_terminal",
+          "condition": null,
+          "state_updates": [
+            { "variable": "data_logs", "operation": "add", "value": "log_2140_disaster" }
+          ]
+        }
+      ]
+    },
+    "ruined_terminal": {
+      "id": "ruined_terminal",
+      "text": "The terminal screen crackles: 'WARNING: Temporal Overload at 04:00 UTC. Dr. Aris modified the containment frequency.' You recover an encrypted Quantum Passkey from the melted console.",
+      "image_path": "assets/images/chrono_terminal.webp",
+      "audio_path": "assets/audio/chrono_ambient.mp3",
+      "sfx_path": "assets/audio/item_pickup.mp3",
+      "effect": null,
+      "choices": [
+        {
+          "text": "Shift timelines to 2088 using the Quantum Passkey",
+          "target_node_id": "past_core_room",
+          "condition": null,
+          "state_updates": [
+            { "variable": "inventory", "operation": "add", "value": "quantum_passkey" },
+            { "variable": "timeline", "operation": "set", "value": "2088" }
+          ]
+        }
+      ]
+    },
+    "past_core_room": {
+      "id": "past_core_room",
+      "text": "A blinding blue flash. You are standing in 2088. The station is immaculate, gleaming with gold lights and hums of pristine fusion reactors. Scientists move around blissfully unaware of the catastrophe 52 years in their future. Dr. Aris stands near the main reactor.",
+      "image_path": "assets/images/chrono_past.webp",
+      "audio_path": "assets/audio/chrono_past_ambient.mp3",
+      "sfx_path": "assets/audio/time_shift.mp3",
+      "effect": "flash_white",
+      "choices": [
+        {
+          "text": "Confront Dr. Aris about his frequency modifications",
+          "target_node_id": "confront_aris",
+          "condition": null,
+          "state_updates": null
+        },
+        {
+          "text": "Use your passkey to lock the reactor frequency override panel",
+          "target_node_id": "lock_override",
+          "condition": { "variable": "inventory", "operator": "contains", "value": "quantum_passkey" },
+          "state_updates": [
+            { "variable": "reactor_secured", "operation": "set", "value": true }
+          ]
+        }
+      ]
+    },
+    "confront_aris": {
+      "id": "confront_aris",
+      "text": "Dr. Aris turns around, surprised: 'Who authorized you here? The Prometheus Core will bridge humanity across time!' He presses an emergency lockdown button, sending alarm sirens blaring throughout the station.",
+      "image_path": "assets/images/chrono_past.webp",
+      "audio_path": "assets/audio/chrono_alarm.mp3",
+      "sfx_path": null,
+      "effect": "flash_red",
+      "choices": [
+        {
+          "text": "Execute a sudden Time-Swap back to 2140 behind the security guard",
+          "target_node_id": "ambush_future",
+          "condition": null,
+          "state_updates": [
+            { "variable": "timeline", "operation": "set", "value": "2140" }
+          ]
+        },
+        {
+          "text": "Try to convince Aris using the 2140 disaster logs",
+          "target_node_id": "convince_aris",
+          "condition": { "variable": "data_logs", "operator": "contains", "value": "log_2140_disaster" },
+          "state_updates": [
+            { "variable": "aris_convinced", "operation": "set", "value": true }
+          ]
+        }
+      ]
+    },
+    "lock_override": {
+      "id": "lock_override",
+      "text": "You insert the Quantum Passkey into the 2088 mainframe and purge the frequency override. The core stabilizing emitters lock into place with a heavy hydraulic thud.",
+      "image_path": "assets/images/chrono_past.webp",
+      "audio_path": "assets/audio/chrono_past_ambient.mp3",
+      "sfx_path": "assets/audio/success_chime.mp3",
+      "effect": "flash_green",
+      "choices": [
+        {
+          "text": "Return to 2140 to verify if the future disaster was averted",
+          "target_node_id": "ending_salvation",
+          "condition": null,
+          "state_updates": null
+        }
+      ]
+    },
+    "ambush_future": {
+      "id": "ambush_future",
+      "text": "You pop back into 2140 ruin, run past the collapsed bulkhead where the guard stood in 2088, and leap back to 2088 right behind Aris, subduing the control panel manual override switch!",
+      "image_path": "assets/images/chrono_terminal.webp",
+      "audio_path": "assets/audio/chrono_ambient.mp3",
+      "sfx_path": "assets/audio/time_shift.mp3",
+      "effect": "time_rift_blue",
+      "choices": [
+        {
+          "text": "Trigger a temporal feedback loop to erase the rift forever",
+          "target_node_id": "ending_paradox",
+          "condition": null,
+          "state_updates": null
+        },
+        {
+          "text": "Overload the core to destroy the station and isolate time",
+          "target_node_id": "ending_collapse",
+          "condition": null,
+          "state_updates": null
+        }
+      ]
+    },
+    "convince_aris": {
+      "id": "convince_aris",
+      "text": "Dr. Aris stares at the holographic log of 2140 in horror. 'Good God... my calculations were corrupted by the anomaly.' He immediately aborts the test sequence.",
+      "image_path": "assets/images/chrono_past.webp",
+      "audio_path": "assets/audio/chrono_past_ambient.mp3",
+      "sfx_path": null,
+      "effect": "flash_green",
+      "choices": [
+        {
+          "text": "Step into the stabilized temporal rift to return to a restored timeline",
+          "target_node_id": "ending_salvation",
+          "condition": null,
+          "state_updates": null
+        }
+      ]
+    },
+    "ending_salvation": {
+      "id": "ending_salvation",
+      "text": "ENDING 1: SALVATION\nYou open your eyes in 2140. The station around you is not ruined, but a thriving, golden hub of interstellar exploration. The disaster was averted, and humanity's timeline remains intact thanks to your Chrono-Anchor.",
+      "image_path": "assets/images/chrono_past.webp",
+      "audio_path": "assets/audio/victory_theme.mp3",
+      "sfx_path": null,
+      "effect": "flash_gold",
+      "choices": []
+    },
+    "ending_paradox": {
+      "id": "ending_paradox",
+      "text": "ENDING 2: THE PARADOX LOOP\nThe temporal feedback loop seals the rift, but binds your consciousness into the Chrono-Anchor itself. You are now a living ghost existing across all seconds of Prometheus simultaneously, watching eternity unfold.",
+      "image_path": "assets/images/chrono_terminal.webp",
+      "audio_path": "assets/audio/mystery_theme.mp3",
+      "sfx_path": null,
+      "effect": "time_rift_blue",
+      "choices": []
+    },
+    "ending_collapse": {
+      "id": "ending_collapse",
+      "text": "ENDING 3: TOTAL COLLAPSE\nThe reactor overloads, vaporizing Station Prometheus in both timelines. Time seals its scar, but humanity loses its gateway to the stars forever.",
+      "image_path": "assets/images/chrono_cover.webp",
+      "audio_path": "assets/audio/sad_theme.mp3",
+      "sfx_path": null,
+      "effect": "flash_red",
+      "choices": []
+    }
+  }
+}

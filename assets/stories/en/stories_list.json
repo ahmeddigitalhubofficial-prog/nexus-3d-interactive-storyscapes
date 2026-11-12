@@ -1,0 +1,88 @@
+[
+  {
+    "id": "chrono_core",
+    "title": "Chrono-Core: The Echo of Prometheus",
+    "description": "Shift between 2088 and 2140 in real-time aboard a shattered space station to prevent a temporal extinction event.",
+    "genre": "Sci-Fi & Time-Swap 3D Action",
+    "cover_image": "assets/images/chrono_cover.webp",
+    "age_rating": "16+",
+    "difficulty": "Hard",
+    "is_3d": true
+  },
+  {
+    "id": "abyssal_archive",
+    "title": "Crypt of Secrets: The Abyssal Archive",
+    "description": "Navigate shifting subterranean catacombs beneath Victorian Europe where every unlocked door demands a dark sacrifice.",
+    "genre": "Dark Gothic Horror 3D",
+    "cover_image": "assets/images/abyssal_cover.webp",
+    "age_rating": "18+",
+    "difficulty": "Hard",
+    "is_3d": true
+  },
+  {
+    "id": "neon_phantom",
+    "title": "Neon Phantom: Tokyo 2099",
+    "description": "Walk inside 3D holographic memory reconstructions of crime victims to alter small clues in the past and unmask a cyber assassin.",
+    "genre": "Cyberpunk Detective 3D",
+    "cover_image": "assets/images/neon_cover.webp",
+    "age_rating": "16+",
+    "difficulty": "Medium",
+    "is_3d": true
+  },
+  {
+    "id": "last_beacon",
+    "title": "The Last Beacon",
+    "description": "Traverse a frozen world of endless cosmic dark to repair massive light beacons keeping humanity safe from shadow hunters.",
+    "genre": "Post-Apocalyptic Survival 3D",
+    "cover_image": "assets/images/beacon_cover.webp",
+    "age_rating": "12+",
+    "difficulty": "Medium",
+    "is_3d": true
+  },
+  {
+    "id": "valkyrie_down",
+    "title": "Valkyrie Down: The Ruins of Asgard",
+    "description": "Crash land on a mythic alien planet where ancient AI constructs are worshipped as Norse Gods. Harness alien runes to survive.",
+    "genre": "Nordic Sci-Fi Action 3D",
+    "cover_image": "assets/images/valkyrie_cover.webp",
+    "age_rating": "16+",
+    "difficulty": "Hard",
+    "is_3d": true
+  },
+  {
+    "id": "horror_crypt",
+    "title": "Crypt of Secrets (Classic)",
+    "description": "You find yourself trapped in an ancient family crypt. Solve puzzles to escape before your flashlight runs out.",
+    "genre": "Horror & Suspense",
+    "cover_image": "assets/images/horror_cover.webp",
+    "age_rating": "16+",
+    "difficulty": "Hard"
+  },
+  {
+    "id": "comedy_treasure",
+    "title": "The Accidental Treasure",
+    "description": "A comedic adventure of a failing pirate who finds an ancient treasure map, only to discover it's a grocery list.",
+    "genre": "Comedy & Adventure",
+    "cover_image": "assets/images/comedy_cover.webp",
+    "age_rating": "Everyone",
+    "difficulty": "Easy"
+  },
+  {
+    "id": "history_timetravel",
+    "title": "Guardian of Time",
+    "description": "Your time machine malfunctions, landing you in ancient Egypt during the pyramid construction.",
+    "genre": "History & Sci-Fi",
+    "cover_image": "assets/images/history_cover.webp",
+    "age_rating": "12+",
+    "difficulty": "Medium"
+  },
+  {
+    "id": "sugar_clouds",
+    "title": "Sugar Cloud Academy",
+    "description": "A magical fantasy adventure helping a flying teapot and baby dragon restore the colors of cotton candy clouds.",
+    "genre": "Kids & Fantasy",
+    "cover_image": "assets/images/sugar_clouds_cover.webp",
+    "age_rating": "Everyone",
+    "difficulty": "Very Easy"
+  }
+]

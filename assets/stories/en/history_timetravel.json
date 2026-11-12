@@ -1,0 +1,239 @@
+{
+  "story_title": "Guardian of Time",
+  "start_node_id": "intro",
+  "nodes": {
+    "intro": {
+      "id": "intro",
+      "text": "You open your eyes with difficulty to find yourself lying on fine sand under a scorching sun. Looking around, you are astounded: the Pyramids of Giza rise before you, still under construction! Your time machine emits thick smoke, and its 'Sun Crystal' has shattered. You need a replacement crystal to return to the 21st century.",
+      "image_path": "assets/images/history_pyramids.webp",
+      "audio_path": "assets/audio/history_ambient.mp3",
+      "sfx_path": "assets/audio/spark_fail.mp3",
+      "effect": "shake",
+      "choices": [
+        {
+          "text": "Head towards the nearby Egyptian village by the Nile",
+          "target_node_id": "village",
+          "condition": null,
+          "state_updates": null
+        },
+        {
+          "text": "Sneak carefully into the Great Pyramid construction site",
+          "target_node_id": "pyramid_site",
+          "condition": null,
+          "state_updates": [
+            { "variable": "fear", "operation": "add", "value": 10 }
+          ]
+        }
+      ]
+    },
+    "village": {
+      "id": "village",
+      "text": "You enter the crowded Egyptian village. A sharp-eyed old temple priest notices you. He approaches and whispers: 'Your clothes are strange, and your face bears features of a very distant time... Are you sent by the gods?' He seems smart and might help you.",
+      "image_path": "assets/images/history_village.webp",
+      "audio_path": "assets/audio/history_ambient.mp3",
+      "sfx_path": null,
+      "effect": null,
+      "choices": [
+        {
+          "text": "Tell him the truth: that you are a time traveler",
+          "target_node_id": "tell_truth",
+          "condition": null,
+          "state_updates": [
+            { "variable": "fear", "operation": "add", "value": 15 }
+          ]
+        },
+        {
+          "text": "Pretend to be a merchant from a distant land seeking to trade",
+          "target_node_id": "pretend_merchant",
+          "condition": null,
+          "state_updates": null
+        }
+      ]
+    },
+    "tell_truth": {
+      "id": "tell_truth",
+      "text": "The priest's eyes widen in surprise, but he smiles mysteriously and says: 'Our ancient writings spoke of time guardians. If you are truthful, solve this riddle: What is born young in the morning, grows old in the evening, and gives life to all?'",
+      "image_path": "assets/images/history_priest.webp",
+      "audio_path": "assets/audio/history_tension.mp3",
+      "sfx_path": null,
+      "effect": null,
+      "choices": [
+        {
+          "text": "The answer is: The Sun (Ra)",
+          "target_node_id": "riddle_solved",
+          "condition": null,
+          "state_updates": null
+        },
+        {
+          "text": "The answer is: Man",
+          "target_node_id": "riddle_failed",
+          "condition": null,
+          "state_updates": [
+            { "variable": "health", "operation": "subtract", "value": 10 }
+          ]
+        }
+      ]
+    },
+    "pretend_merchant": {
+      "id": "pretend_merchant",
+      "text": "The priest looks at you suspiciously and says: 'Our merchants do not wear such shiny clothes, nor do they carry devices that tick with strange beats. You are hiding something, and I will not trust you!' He walks away and leaves you alone in the market.",
+      "image_path": "assets/images/history_market.webp",
+      "audio_path": "assets/audio/history_ambient.mp3",
+      "sfx_path": "assets/audio/crowd_disapprove.mp3",
+      "effect": null,
+      "choices": [
+        {
+          "text": "Head to the pyramid site to look for another way",
+          "target_node_id": "pyramid_site",
+          "condition": null,
+          "state_updates": null
+        }
+      ]
+    },
+    "riddle_solved": {
+      "id": "riddle_solved",
+      "text": "The priest exclaims happily: 'Indeed! It is the eye of Ra, the burning Sun! You are truly a time guardian.' He leads you to the secret temple crypt and hands you a golden sacred scarab set with the rare 'Blue Sun Crystal'!",
+      "image_path": "assets/images/history_temple.webp",
+      "audio_path": "assets/audio/history_ambient.mp3",
+      "sfx_path": "assets/audio/angelic_choir.mp3",
+      "effect": null,
+      "codex_updates": [
+        { "entry_id": "blue_crystal_lore", "unlocked": true }
+      ],
+      "choices": [
+        {
+          "text": "Take the Sun Crystal and return to your time machine immediately",
+          "target_node_id": "repair_machine",
+          "condition": null,
+          "state_updates": [
+            { "variable": "inventory", "operation": "add", "value": "sun_crystal" }
+          ]
+        }
+      ]
+    },
+    "riddle_failed": {
+      "id": "riddle_failed",
+      "text": "The priest shakes his head in regret: 'Wrong! The gods are angry with you'. You suddenly feel a severe headache and weakness striking your body as a magical punishment. The priest advises you to leave before the temple guards arrest you.",
+      "image_path": "assets/images/history_temple_dark.webp",
+      "audio_path": "assets/audio/history_tension.mp3",
+      "sfx_path": "assets/audio/thunder.mp3",
+      "effect": "flash_red",
+      "choices": [
+        {
+          "text": "Flee towards the pyramid construction site to find a way out",
+          "target_node_id": "pyramid_site",
+          "condition": null,
+          "state_updates": null
+        }
+      ]
+    },
+    "pyramid_site": {
+      "id": "pyramid_site",
+      "text": "You arrive at the pyramid site crowded with workers and soldiers. Under a large wooden structure, you see an ancient ritual altar containing a small golden Sphinx statue shining with a mysterious light. The guards approach you suspiciously; you have only a few seconds to act!",
+      "image_path": "assets/images/history_site.webp",
+      "audio_path": "assets/audio/history_tension.mp3",
+      "sfx_path": null,
+      "effect": null,
+      "timer_seconds": 12,
+      "fallback_node_id": "caught_by_guards",
+      "choices": [
+        {
+          "text": "Jump towards the altar to inspect the Sphinx statue",
+          "target_node_id": "inspect_sphinx",
+          "condition": null,
+          "state_updates": null
+        },
+        {
+          "text": "Try to retreat and hide behind the massive stone blocks",
+          "target_node_id": "hide_stones",
+          "condition": null,
+          "state_updates": [
+            { "variable": "fear", "operation": "add", "value": 15 }
+          ]
+        }
+      ]
+    },
+    "inspect_sphinx": {
+      "id": "inspect_sphinx",
+      "text": "You stand before the small golden Sphinx statue on the altar. It radiates obvious temporal energy. Let's use AR to inspect the statue and search for the energy crystal hidden inside!",
+      "image_path": "assets/images/history_sphinx.webp",
+      "audio_path": "assets/audio/history_tension.mp3",
+      "sfx_path": null,
+      "effect": null,
+      "ar_config": {
+        "model_path": "assets/models/sphinx_statue.glb",
+        "prompt_text": {
+          "ar": "ضع تمثال أبي الهول على الطاولة، واضغط على عيونه لتفتح حجرة السر",
+          "en": "Place the Sphinx statue on the table, and tap its eyes to open the secret compartment"
+        },
+        "trigger_item": "sun_crystal"
+      },
+      "choices": [
+        {
+          "text": "After obtaining the Sun Crystal, run back to your time machine",
+          "target_node_id": "repair_machine",
+          "condition": {
+            "variable": "inventory",
+            "operator": "contains",
+            "value": "sun_crystal"
+          },
+          "state_updates": null
+        },
+        {
+          "text": "You didn't find the crystal, and the guards surrounded you!",
+          "target_node_id": "caught_by_guards",
+          "condition": {
+            "variable": "inventory",
+            "operator": "not_contains",
+            "value": "sun_crystal"
+          },
+          "state_updates": null
+        }
+      ]
+    },
+    "hide_stones": {
+      "id": "hide_stones",
+      "text": "You hide behind a large stone block. The guards are searching nearby. You feel your heart racing with fear. You must calm down completely, or they will notice you...",
+      "image_path": "assets/images/history_stones.webp",
+      "audio_path": "assets/audio/history_tension.mp3",
+      "sfx_path": null,
+      "effect": null,
+      "choices": [
+        {
+          "text": "Try to take a deep breath, calm yourself, and sneak to the altar",
+          "target_node_id": "inspect_sphinx",
+          "condition": null,
+          "state_updates": null
+        },
+        {
+          "text": "Panic takes over and you start running randomly!",
+          "target_node_id": "caught_by_guards",
+          "condition": null,
+          "state_updates": null
+        }
+      ]
+    },
+    "repair_machine": {
+      "id": "repair_machine",
+      "text": "You reach the time machine and insert the 'Sun Crystal' into its core reactor. The machine hums loudly, turns bright blue, and then vanishes in a brilliant flash. You find yourself standing in your room in the 21st century, safe and sound, holding a real ancient Egyptian scarab as a souvenir!",
+      "image_path": "assets/images/history_victory.webp",
+      "audio_path": "assets/audio/victory_theme.mp3",
+      "sfx_path": "assets/audio/time_travel.mp3",
+      "effect": null,
+      "is_ending": true,
+      "ending_title": "Master of Time",
+      "choices": []
+    },
+    "caught_by_guards": {
+      "id": "caught_by_guards",
+      "text": "The strong guards seize you and lead you before the Pharaoh as a bizarre stranger. You are sentenced to hard labor hauling stone blocks to build the pyramids for the rest of your life. You have truly become part of history, but in all the wrong ways!",
+      "image_path": "assets/images/history_jail.webp",
+      "audio_path": "assets/audio/game_over_theme.mp3",
+      "sfx_path": "assets/audio/guard_laugh.mp3",
+      "effect": "flash_red",
+      "is_ending": true,
+      "ending_title": "Eternal Pyramid Builder",
+      "choices": []
+    }
+  }
+}

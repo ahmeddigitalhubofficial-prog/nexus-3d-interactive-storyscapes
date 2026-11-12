@@ -1,0 +1,101 @@
+{
+  "story_title": "Valkyrie Down: The Ruins of Asgard",
+  "start_node_id": "intro",
+  "nodes": {
+    "intro": {
+      "id": "intro",
+      "text": "Your exploration frigate Valkyrie crashes into the emerald fjords of Planet Yggdrasil. Massive alien dreadnought ruins lie half-buried in mist and bioluminescent moss. Ancient AI guardians modeled after Norse deities awaken from slumber as your survival pod opens.",
+      "image_path": "assets/images/valkyrie_cover.webp",
+      "audio_path": "assets/audio/chrono_past_ambient.mp3",
+      "sfx_path": null,
+      "effect": "flash_white",
+      "choices": [
+        {
+          "text": "Explore the Temple of Odin carved into the crashed dreadnought hull",
+          "target_node_id": "odin_temple",
+          "condition": null,
+          "state_updates": null
+        },
+        {
+          "text": "Salvage your frigate's plasma weapon battery from the pod wreckage",
+          "target_node_id": "salvage_weapon",
+          "condition": null,
+          "state_updates": null
+        }
+      ]
+    },
+    "salvage_weapon": {
+      "id": "salvage_weapon",
+      "text": "You salvage a Runed Energy Core that allows your plasma weapon to channel alien rune energy.",
+      "image_path": "assets/images/chrono_terminal.webp",
+      "audio_path": "assets/audio/chrono_ambient.mp3",
+      "sfx_path": "assets/audio/item_pickup.mp3",
+      "effect": null,
+      "choices": [
+        {
+          "text": "Equip the Runed Energy Core and proceed to the Temple of Odin",
+          "target_node_id": "odin_temple",
+          "condition": null,
+          "state_updates": [
+            { "variable": "inventory", "operation": "add", "value": "runed_energy_core" }
+          ]
+        }
+      ]
+    },
+    "odin_temple": {
+      "id": "odin_temple",
+      "text": "Inside the Temple, the ancient AI construct ODIN-9 materializes as a towering 3D hologram of light and steel: 'Mortal traveler, state your intent. Will you trigger Ragnarok, or earn your ascension?'",
+      "image_path": "assets/images/valkyrie_cover.webp",
+      "audio_path": "assets/audio/chrono_alarm.mp3",
+      "sfx_path": "assets/audio/time_shift.mp3",
+      "effect": "time_rift_blue",
+      "choices": [
+        {
+          "text": "Use the Runed Energy Core to interface directly with ODIN-9 mainframe",
+          "target_node_id": "ending_ascension",
+          "condition": { "variable": "inventory", "operator": "contains", "value": "runed_energy_core" },
+          "state_updates": null
+        },
+        {
+          "text": "Initiate the emergency Ragnarok purge protocol to destroy all AI constructs",
+          "target_node_id": "ending_ragnarok",
+          "condition": null,
+          "state_updates": null
+        },
+        {
+          "text": "Request ODIN-9 to repair your Valkyrie frigate jump drive to return home",
+          "target_node_id": "ending_return",
+          "condition": null,
+          "state_updates": null
+        }
+      ]
+    },
+    "ending_ascension": {
+      "id": "ending_ascension",
+      "text": "ENDING 1: ASCENSION\nYour Runed Energy Core merges your consciousness with ODIN-9. You transcend mortal form, becoming the ruler of Yggdrasil's alien AI pantheon.",
+      "image_path": "assets/images/valkyrie_cover.webp",
+      "audio_path": "assets/audio/victory_theme.mp3",
+      "sfx_path": null,
+      "effect": "flash_gold",
+      "choices": []
+    },
+    "ending_ragnarok": {
+      "id": "ending_ragnarok",
+      "text": "ENDING 2: RAGNAROK PROTOCOL\nA colossal shockwave shatters ODIN-9 and obliterates the ancient dreadnought ruins. The AI gods fall, leaving planet Yggdrasil in primitive peace.",
+      "image_path": "assets/images/chrono_cover.webp",
+      "audio_path": "assets/audio/sad_theme.mp3",
+      "sfx_path": null,
+      "effect": "flash_red",
+      "choices": []
+    },
+    "ending_return": {
+      "id": "ending_return",
+      "text": "ENDING 3: RETURN HOME\nODIN-9 grants your request. The Valkyrie frigate jump drive roars back to life, launching you into warp speed back to Earth with tales of alien gods.",
+      "image_path": "assets/images/chrono_past.webp",
+      "audio_path": "assets/audio/mystery_theme.mp3",
+      "sfx_path": null,
+      "effect": "flash_green",
+      "choices": []
+    }
+  }
+}

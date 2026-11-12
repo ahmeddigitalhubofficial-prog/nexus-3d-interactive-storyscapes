@@ -1,0 +1,172 @@
+{
+  "story_title": "رحلة الكنز... بالخطأ!",
+  "start_node_id": "intro",
+  "nodes": {
+    "intro": {
+      "id": "intro",
+      "text": "إنت القبطان 'مشمش'، قرصان فاشل عمره ما عرف يلاقي قطة تايهة في حياته، ما بالك بقى بكنز! قاعد في خمارة القراصنة وبتعيط عشان السفينة بتسرب مية. فجأة، يوقع راجل غريب خريطة قديمة وصفرا... جوة ويختفي.",
+      "image_path": "assets/images/comedy_tavern.webp",
+      "audio_path": "assets/audio/comedy_bgm.mp3",
+      "sfx_path": null,
+      "effect": null,
+      "choices": [
+        {
+          "text": "حاول تقرأ الخريطة اللي مليانة خطوط ورموز بنفسك",
+          "target_node_id": "read_alone",
+          "condition": null,
+          "state_updates": [
+            { "variable": "fear", "operation": "add", "value": 5 }
+          ]
+        },
+        {
+          "text": "اطلب من البغبغان الذكي 'فلفل' يقرأهالك",
+          "target_node_id": "ask_parrot",
+          "condition": null,
+          "state_updates": null
+        }
+      ]
+    },
+    "read_alone": {
+      "id": "read_alone",
+      "text": "برقت في الخريطة. الرموز غريبة أوي. بدأت تقرأ بصوت عالي: '3 كيلو بطاطس، علبة جبنة، ومكنسة صغيرة...' ثواني كدة، هي دي إحداثيات سحرية؟ ولا لستة طلبات المحافظ؟ لحد ما قررت تروح السوق الملكي عشان تدور على الكنز هناك!",
+      "image_path": "assets/images/comedy_map.webp",
+      "audio_path": "assets/audio/comedy_bgm.mp3",
+      "sfx_path": "assets/audio/scratch_head.mp3",
+      "effect": null,
+      "choices": [
+        {
+          "text": "اطلع جري على السوق الملكي الزحمة",
+          "target_node_id": "market_arrival",
+          "condition": null,
+          "state_updates": [
+            { "variable": "inventory", "operation": "add", "value": "grocery_list" }
+          ]
+        }
+      ]
+    },
+    "ask_parrot": {
+      "id": "ask_parrot",
+      "text": "البغبغان 'فلفل' بص على الخريطة ومات على نفسه من الضحك وقال: 'يا غبي! دي لستة طلبات مرات المحافظ اللي ضايعة من أسبوع! بس في مكافأة 50 حتة دهب للي يلاقيها!'",
+      "image_path": "assets/images/comedy_parrot.webp",
+      "audio_path": "assets/audio/comedy_bgm.mp3",
+      "sfx_path": "assets/audio/parrot_laugh.mp3",
+      "effect": null,
+      "codex_updates": [
+        { "entry_id": "parrot_secret", "unlocked": true }
+      ],
+      "choices": [
+        {
+          "text": "روح للمحافظ عشان تديله لستة الطلبات وتاخد الجايزة",
+          "target_node_id": "governor_victory",
+          "condition": null,
+          "state_updates": null
+        },
+        {
+          "text": "سيبك من البغبغان وروح السوق عشان تشتري البطاطس السحرية دي!",
+          "target_node_id": "market_arrival",
+          "condition": null,
+          "state_updates": [
+            { "variable": "inventory", "operation": "add", "value": "grocery_list" }
+          ]
+        }
+      ]
+    },
+    "governor_victory": {
+      "id": "governor_victory",
+      "text": "دخلت قصر المحافظ. المحافظ فرح جداً لما لقى لستة الطلبات عشان مراته كانت قالبة وشها عليه! أداك 50 حتة دهب. مبقتش قرصان خلاص، بس بقيت غني! النهاية: قرصان الدليفري السريع",
+      "image_path": "assets/images/comedy_victory_gold.webp",
+      "audio_path": "assets/audio/victory_theme.mp3",
+      "sfx_path": "assets/audio/coin_reward.mp3",
+      "effect": null,
+      "is_ending": true,
+      "ending_title": "قرصان الدليفري السريع",
+      "choices": []
+    },
+    "market_arrival": {
+      "id": "market_arrival",
+      "text": "وصلت السوق الملكي الزحمة بالبياعين والزبائن. فجأة، خبط فيك عسكري بشنب تخين وبص لك بشك: 'بيعمل إيه قرصان معفن مع لستة طلبات مرات المحافظ هنا؟' قدامك ثواني تجري!",
+      "image_path": "assets/images/comedy_guard.webp",
+      "audio_path": "assets/audio/comedy_tension.mp3",
+      "sfx_path": "assets/audio/guard_halt.mp3",
+      "effect": "shake",
+      "timer_seconds": 10,
+      "fallback_node_id": "jail_ending",
+      "choices": [
+        {
+          "text": "ارمي قفص طماطم في وش العسكري واجري!",
+          "target_node_id": "escape_success",
+          "condition": null,
+          "state_updates": [
+            { "variable": "health", "operation": "subtract", "value": 5 }
+          ]
+        },
+        {
+          "text": "حاول تقنعه إنك المحافظ بس متنكر",
+          "target_node_id": "jail_ending",
+          "condition": null,
+          "state_updates": null
+        }
+      ]
+    },
+    "escape_success": {
+      "id": "escape_success",
+      "text": "الطماطم طارت وجت في وش العسكري بالظبط! وقع على الأرض وهو بيصرخ وإنت هربت جوة حارة ضيقة. لقيت صندوق خضار متروك. يلا نستخدم الـ AR نفتش... حط صندوق الخضار على الأرض، واضغط عليه عشان تدور على الكنز",
+      "image_path": "assets/images/comedy_alley.webp",
+      "audio_path": "assets/audio/comedy_bgm.mp3",
+      "sfx_path": null,
+      "effect": null,
+      "ar_config": {
+        "model_path": "assets/models/crate_comedy.glb",
+        "prompt_text": {
+          "ar": "حط صندوق الخضار على الأرض، واضغط عليه عشان تدور على الكنز",
+          "en": "Place the grocery crate on the floor, and tap it to search for treasure"
+        },
+        "trigger_item": "golden_potato"
+      },
+      "choices": [
+        {
+          "text": "ارجع للسفينة مع 'البطاطساية الدهب' اللي لقيتها!",
+          "target_node_id": "ship_victory",
+          "condition": {
+            "variable": "inventory",
+            "operator": "contains",
+            "value": "golden_potato"
+          },
+          "state_updates": null
+        },
+        {
+          "text": "ملقتش حاجة مفيدة. سلم نفسك للعساكر.",
+          "target_node_id": "jail_ending",
+          "condition": {
+            "variable": "inventory",
+            "operator": "not_contains",
+            "value": "golden_potato"
+          },
+          "state_updates": null
+        }
+      ]
+    },
+    "ship_victory": {
+      "id": "ship_victory",
+      "text": "وصلت سفينتك ومعاك البطاطساية الدهب. طلعت حتة أثرية نادرة مصنوعة من الدهب الصافي وتسوى آلاف الدنانير! الرجالة بتوعك عملوا حفلة وهيصوا لك كأعظم قرصان لقى كنز بالصدفة! النهاية: ملك البطاطس الدهب",
+      "image_path": "assets/images/comedy_victory_ship.webp",
+      "audio_path": "assets/audio/victory_theme.mp3",
+      "sfx_path": "assets/audio/cheering.mp3",
+      "effect": null,
+      "is_ending": true,
+      "ending_title": "ملك البطاطس الدهب",
+      "choices": []
+    },
+    "jail_ending": {
+      "id": "jail_ending",
+      "text": "العساكر قبضوا عليك ورموك في السجن الملكي. بقوا يدوك شوربة بطاطس طعمها وحش كل يوم. أهو على الأقل بتاكل بطاطس ببلاش بس ورا الحديد! النهاية: سجين البطاطس",
+      "image_path": "assets/images/comedy_jail.webp",
+      "audio_path": "assets/audio/game_over_theme.mp3",
+      "sfx_path": "assets/audio/jail_door.mp3",
+      "effect": "flash_red",
+      "is_ending": true,
+      "ending_title": "سجين البطاطس",
+      "choices": []
+    }
+  }
+}

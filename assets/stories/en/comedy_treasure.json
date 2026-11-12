@@ -1,0 +1,172 @@
+{
+  "story_title": "The Accidental Treasure",
+  "start_node_id": "intro",
+  "nodes": {
+    "intro": {
+      "id": "intro",
+      "text": "You are Captain 'Mishmish', a failing pirate who hasn't found a lost cat in his life, let alone a treasure! You sit in the pirate tavern crying because your ship is leaking water. Suddenly, a strange man drops a yellow old map next to you, whispers: 'The secret is inside...' and vanishes.",
+      "image_path": "assets/images/comedy_tavern.webp",
+      "audio_path": "assets/audio/comedy_bgm.mp3",
+      "sfx_path": null,
+      "effect": null,
+      "choices": [
+        {
+          "text": "Try reading the map full of lines and symbols yourself",
+          "target_node_id": "read_alone",
+          "condition": null,
+          "state_updates": [
+            { "variable": "fear", "operation": "add", "value": 5 }
+          ]
+        },
+        {
+          "text": "Ask the smart parrot 'Felfel' to read it for you",
+          "target_node_id": "ask_parrot",
+          "condition": null,
+          "state_updates": null
+        }
+      ]
+    },
+    "read_alone": {
+      "id": "read_alone",
+      "text": "You stare at the map. The symbols are very strange. You read aloud: '3 kg potatoes, a block of cheese, and a small broom...' Wait, are these magical coordinates? Or a royal grocery list? You decide to head to the Royal Market to search for the treasure there!",
+      "image_path": "assets/images/comedy_map.webp",
+      "audio_path": "assets/audio/comedy_bgm.mp3",
+      "sfx_path": "assets/audio/scratch_head.mp3",
+      "effect": null,
+      "choices": [
+        {
+          "text": "Set off immediately to the busy Royal Market",
+          "target_node_id": "market_arrival",
+          "condition": null,
+          "state_updates": [
+            { "variable": "inventory", "operation": "add", "value": "grocery_list" }
+          ]
+        }
+      ]
+    },
+    "ask_parrot": {
+      "id": "ask_parrot",
+      "text": "Felfel the parrot looks at the map, laughs hysterically, and says: 'You idiot! This is the governor's wife's grocery list that went missing a week ago! But there is a 50 gold coin reward for finding it!'",
+      "image_path": "assets/images/comedy_parrot.webp",
+      "audio_path": "assets/audio/comedy_bgm.mp3",
+      "sfx_path": "assets/audio/parrot_laugh.mp3",
+      "effect": null,
+      "codex_updates": [
+        { "entry_id": "parrot_secret", "unlocked": true }
+      ],
+      "choices": [
+        {
+          "text": "Go to the governor to hand over the list and get the reward",
+          "target_node_id": "governor_victory",
+          "condition": null,
+          "state_updates": null
+        },
+        {
+          "text": "Reject the parrot's words and go to the market to buy these magical potatoes!",
+          "target_node_id": "market_arrival",
+          "condition": null,
+          "state_updates": [
+            { "variable": "inventory", "operation": "add", "value": "grocery_list" }
+          ]
+        }
+      ]
+    },
+    "governor_victory": {
+      "id": "governor_victory",
+      "text": "You enter the governor's palace. The governor is very happy to find the grocery list because his wife was angry at him! He gives you 50 gold coins and appoints you 'Official Groceries Transporter'. You aren't a pirate now, but you are rich!",
+      "image_path": "assets/images/comedy_victory_gold.webp",
+      "audio_path": "assets/audio/victory_theme.mp3",
+      "sfx_path": "assets/audio/coin_reward.mp3",
+      "effect": null,
+      "is_ending": true,
+      "ending_title": "Express Delivery Pirate",
+      "choices": []
+    },
+    "market_arrival": {
+      "id": "market_arrival",
+      "text": "You arrive at the busy Royal Market. Suddenly, a guard with a thick mustache bumps into you and looks at you suspiciously: 'What is a dirty pirate doing with the governor's wife's grocery list here? Hands up!' You have 3 seconds to escape!",
+      "image_path": "assets/images/comedy_guard.webp",
+      "audio_path": "assets/audio/comedy_tension.mp3",
+      "sfx_path": "assets/audio/guard_halt.mp3",
+      "effect": "shake",
+      "timer_seconds": 10,
+      "fallback_node_id": "jail_ending",
+      "choices": [
+        {
+          "text": "Throw a basket of tomatoes in the guard's face and run!",
+          "target_node_id": "escape_success",
+          "condition": null,
+          "state_updates": [
+            { "variable": "health", "operation": "subtract", "value": 5 }
+          ]
+        },
+        {
+          "text": "Try to convince him that you are the governor in disguise",
+          "target_node_id": "jail_ending",
+          "condition": null,
+          "state_updates": null
+        }
+      ]
+    },
+    "escape_success": {
+      "id": "escape_success",
+      "text": "The tomatoes fly and hit the guard's face precisely! He falls screaming while you escape into a narrow alley. You find an abandoned grocery crate. Let's use AR to search the crate and see what's inside!",
+      "image_path": "assets/images/comedy_alley.webp",
+      "audio_path": "assets/audio/comedy_bgm.mp3",
+      "sfx_path": null,
+      "effect": null,
+      "ar_config": {
+        "model_path": "assets/models/crate_comedy.glb",
+        "prompt_text": {
+          "ar": "ضع صندوق البقالة على الأرض، واضغط عليه لتبحث عن الكنز",
+          "en": "Place the grocery crate on the floor, and tap it to search for treasure"
+        },
+        "trigger_item": "golden_potato"
+      },
+      "choices": [
+        {
+          "text": "Return to the ship with the 'Golden Potato' you found!",
+          "target_node_id": "ship_victory",
+          "condition": {
+            "variable": "inventory",
+            "operator": "contains",
+            "value": "golden_potato"
+          },
+          "state_updates": null
+        },
+        {
+          "text": "You didn't find anything useful. Surrender to the guards.",
+          "target_node_id": "jail_ending",
+          "condition": {
+            "variable": "inventory",
+            "operator": "not_contains",
+            "value": "golden_potato"
+          },
+          "state_updates": null
+        }
+      ]
+    },
+    "ship_victory": {
+      "id": "ship_victory",
+      "text": "You arrive at your ship carrying the 'Golden Potato'. It turns out to be a rare artifact made of solid gold worth thousands of gold coins! Your crew celebrates you as the greatest pirate who found a treasure by mistake!",
+      "image_path": "assets/images/comedy_victory_ship.webp",
+      "audio_path": "assets/audio/victory_theme.mp3",
+      "sfx_path": "assets/audio/cheering.mp3",
+      "effect": null,
+      "is_ending": true,
+      "ending_title": "King of the Golden Potato",
+      "choices": []
+    },
+    "jail_ending": {
+      "id": "jail_ending",
+      "text": "The guards catch you and throw you in the Royal Jail. They serve you poor potato soup every day. At least you got free potatoes, but behind bars!",
+      "image_path": "assets/images/comedy_jail.webp",
+      "audio_path": "assets/audio/game_over_theme.mp3",
+      "sfx_path": "assets/audio/jail_door.mp3",
+      "effect": "flash_red",
+      "is_ending": true,
+      "ending_title": "Potato Prisoner",
+      "choices": []
+    }
+  }
+}

@@ -1,0 +1,183 @@
+{
+  "story_title": "Chrono-Core: أصداء بروميثيوس",
+  "start_node_id": "intro",
+  "nodes": {
+    "intro": {
+      "id": "intro",
+      "text": "على متن محطة بروميثيوس الفضائية، عام 2140. أضواء الطوارئ الحمراء تومض وسط ألواح الهيكل المنهارة. ينبض قفاز الموائم الزمني في يدك اليمنى. أمامك قلب المفاعل المكسور - وشق زمني يشع بنور قادم من عام 2088.",
+      "image_path": "assets/images/chrono_cover.webp",
+      "audio_path": "assets/audio/chrono_ambient.mp3",
+      "sfx_path": null,
+      "effect": "time_rift_blue",
+      "choices": [
+        {
+          "text": "تفعيل الموائم الزمني والعبور إلى الخط الزمني لعام 2088",
+          "target_node_id": "past_core_room",
+          "condition": null,
+          "state_updates": [
+            { "variable": "timeline", "operation": "set", "value": "2088" },
+            { "variable": "chrono_charge", "operation": "set", "value": 100 }
+          ]
+        },
+        {
+          "text": "فحص وحدة التحكم المدمّرة لعام 2140 أولاً",
+          "target_node_id": "ruined_terminal",
+          "condition": null,
+          "state_updates": [
+            { "variable": "data_logs", "operation": "add", "value": "log_2140_disaster" }
+          ]
+        }
+      ]
+    },
+    "ruined_terminal": {
+      "id": "ruined_terminal",
+      "text": "تومض الشاشة: 'تحذير: حمل زمني زائد عند 04:00. قام الدكتور أريس بتعديل تردد الاحتواء.' تستعيد مفتاح المرور الكمي من وحدة التحكم المذابة.",
+      "image_path": "assets/images/chrono_terminal.webp",
+      "audio_path": "assets/audio/chrono_ambient.mp3",
+      "sfx_path": "assets/audio/item_pickup.mp3",
+      "effect": null,
+      "choices": [
+        {
+          "text": "الانتقال إلى عام 2088 باستخدام مفتاح المرور الكمي",
+          "target_node_id": "past_core_room",
+          "condition": null,
+          "state_updates": [
+            { "variable": "inventory", "operation": "add", "value": "quantum_passkey" },
+            { "variable": "timeline", "operation": "set", "value": "2088" }
+          ]
+        }
+      ]
+    },
+    "past_core_room": {
+      "id": "past_core_room",
+      "text": "وميض أزرق خاطف. أنت في عام 2088. المحطة في قمة فخامتها، تتلألأ بالأضواء الذهبية وهدير المفاعلات النظيفة. العلماء يتحركون دون معرفة بالكارثة القادمة بعد 52 سنة. يقف الدكتور أريس قرب المفاعل الرئيسي.",
+      "image_path": "assets/images/chrono_past.webp",
+      "audio_path": "assets/audio/chrono_past_ambient.mp3",
+      "sfx_path": "assets/audio/time_shift.mp3",
+      "effect": "flash_white",
+      "choices": [
+        {
+          "text": "مواجهة الدكتور أريس بشأن تعديلاته للتردد",
+          "target_node_id": "confront_aris",
+          "condition": null,
+          "state_updates": null
+        },
+        {
+          "text": "استخدام مفتاح المرور لقفل لوحة التحكم ومنع التعديل",
+          "target_node_id": "lock_override",
+          "condition": { "variable": "inventory", "operator": "contains", "value": "quantum_passkey" },
+          "state_updates": [
+            { "variable": "reactor_secured", "operation": "set", "value": true }
+          ]
+        }
+      ]
+    },
+    "confront_aris": {
+      "id": "confront_aris",
+      "text": "ينظُر الدكتور أريس باستغراب: 'من سمح لك بالدخول؟ هذا المفاعل سيعبر بالبشرية عبر الزمن!' ثم يضغط زر الإغلاق الطارئ لتنطلق صفارات الإنذار.",
+      "image_path": "assets/images/chrono_past.webp",
+      "audio_path": "assets/audio/chrono_alarm.mp3",
+      "sfx_path": null,
+      "effect": "flash_red",
+      "choices": [
+        {
+          "text": "الانتقال السريع للزمن 2140 خلف الحارس ثم العودة لتقييده",
+          "target_node_id": "ambush_future",
+          "condition": null,
+          "state_updates": [
+            { "variable": "timeline", "operation": "set", "value": "2140" }
+          ]
+        },
+        {
+          "text": "محاولة إقناع أريس باستخدام سجلات الكارثة من 2140",
+          "target_node_id": "convince_aris",
+          "condition": { "variable": "data_logs", "operator": "contains", "value": "log_2140_disaster" },
+          "state_updates": [
+            { "variable": "aris_convinced", "operation": "set", "value": true }
+          ]
+        }
+      ]
+    },
+    "lock_override": {
+      "id": "lock_override",
+      "text": "تدخل مفتاح المرور الكمي وتلغي التعديلات. تثبت أجهزة التوازن الهيدروليكية صوتها القوي مشيرة لاستقرار المفاعل.",
+      "image_path": "assets/images/chrono_past.webp",
+      "audio_path": "assets/audio/chrono_past_ambient.mp3",
+      "sfx_path": "assets/audio/success_chime.mp3",
+      "effect": "flash_green",
+      "choices": [
+        {
+          "text": "العودة لعام 2140 للتأكد من إنقاذ المستقبل",
+          "target_node_id": "ending_salvation",
+          "condition": null,
+          "state_updates": null
+        }
+      ]
+    },
+    "ambush_future": {
+      "id": "ambush_future",
+      "text": "تنتقل لعام 2140 وتمر خلف الحائط المنهار ثم تعود لعام 2088 خلف أريس وتسيطر على لوحة التحكم الرئيسية!",
+      "image_path": "assets/images/chrono_terminal.webp",
+      "audio_path": "assets/audio/chrono_ambient.mp3",
+      "sfx_path": "assets/audio/time_shift.mp3",
+      "effect": "time_rift_blue",
+      "choices": [
+        {
+          "text": "إحداث حلقة تغذية مرتدة لإغلاق الشق الزمني للأبد",
+          "target_node_id": "ending_paradox",
+          "condition": null,
+          "state_updates": null
+        },
+        {
+          "text": "تحميل المفاعل فوق طاقته لتدمير المحطة وعزل الزمن",
+          "target_node_id": "ending_collapse",
+          "condition": null,
+          "state_updates": null
+        }
+      ]
+    },
+    "convince_aris": {
+      "id": "convince_aris",
+      "text": "ينظر الدكتور أريس بصدمة إلى سجلات الدمار في 2140. 'يا إلهي... كانت حساباتي مغلوطة.' ويلغي الاختبار فوراً.",
+      "image_path": "assets/images/chrono_past.webp",
+      "audio_path": "assets/audio/chrono_past_ambient.mp3",
+      "sfx_path": null,
+      "effect": "flash_green",
+      "choices": [
+        {
+          "text": "العبور عبر الشق المستقر للعودة إلى زمن مشرق ومحفوظ",
+          "target_node_id": "ending_salvation",
+          "condition": null,
+          "state_updates": null
+        }
+      ]
+    },
+    "ending_salvation": {
+      "id": "ending_salvation",
+      "text": "النهاية الأولى: الخلاص والنجاة\nتفتح عينيك في عام 2140، المحطة حولك ليست حطاماً بل صرحاً فضائياً عظيم يضج بالحياة. تم تجنب الكارثة، واستمر خط البشرية بسلام بفضل شجاعتك.",
+      "image_path": "assets/images/chrono_past.webp",
+      "audio_path": "assets/audio/victory_theme.mp3",
+      "sfx_path": null,
+      "effect": "flash_gold",
+      "choices": []
+    },
+    "ending_paradox": {
+      "id": "ending_paradox",
+      "text": "النهاية الثانية: حلقة المفارقة الزمنية\nتغلق الحلقة الزمنية الشق، ولكن روحك ترتبط بالقفاز الزمني لتصبح طيفاً حياً موجوداً في كل لحظات محطة بروميثيوس إلى الأبد.",
+      "image_path": "assets/images/chrono_terminal.webp",
+      "audio_path": "assets/audio/mystery_theme.mp3",
+      "sfx_path": null,
+      "effect": "time_rift_blue",
+      "choices": []
+    },
+    "ending_collapse": {
+      "id": "ending_collapse",
+      "text": "النهاية الثالثة: الانهيار التام\nينفجر المفاعل مدمراً محطة بروميثيوس في الزمانين، يلتئم جرح الزمن ولكن تفقد البشرية بوابة النجوم إلى الأبد.",
+      "image_path": "assets/images/chrono_cover.webp",
+      "audio_path": "assets/audio/sad_theme.mp3",
+      "sfx_path": null,
+      "effect": "flash_red",
+      "choices": []
+    }
+  }
+}

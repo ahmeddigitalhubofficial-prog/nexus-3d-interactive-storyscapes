@@ -1,0 +1,135 @@
+{
+  "story_title": "Neon Phantom: Tokyo 2099",
+  "start_node_id": "intro",
+  "nodes": {
+    "intro": {
+      "id": "intro",
+      "text": "Shibuya Sector 9, 2099. Acid rain glimmers under cyan neon signs. As a Memory Weaver detective, you stand over the cybernetically enhanced body of CEO Vance. Your ocular implant initializes the 3D Holographic Memory Reconstruction.",
+      "image_path": "assets/images/neon_cover.webp",
+      "audio_path": "assets/audio/chrono_ambient.mp3",
+      "sfx_path": null,
+      "effect": "flash_white",
+      "choices": [
+        {
+          "text": "Step into the 3D Memory Reconstruction of Vance's final 30 seconds",
+          "target_node_id": "memory_scene",
+          "condition": null,
+          "state_updates": [
+            { "variable": "memory_sync", "operation": "set", "value": 100 }
+          ]
+        },
+        {
+          "text": "Scan the physical alley floor for dropped cyber-implants",
+          "target_node_id": "scan_alley",
+          "condition": null,
+          "state_updates": null
+        }
+      ]
+    },
+    "scan_alley": {
+      "id": "scan_alley",
+      "text": "Your scanner pinpoints an encrypted Neural Decrypter dropped by the assassin near the neon billboard drain.",
+      "image_path": "assets/images/chrono_terminal.webp",
+      "audio_path": "assets/audio/chrono_ambient.mp3",
+      "sfx_path": "assets/audio/item_pickup.mp3",
+      "effect": null,
+      "choices": [
+        {
+          "text": "Equip Neural Decrypter and enter the 3D Hologram Reconstruction",
+          "target_node_id": "memory_scene",
+          "condition": null,
+          "state_updates": [
+            { "variable": "inventory", "operation": "add", "value": "neural_decrypter" }
+          ]
+        }
+      ]
+    },
+    "memory_scene": {
+      "id": "memory_scene",
+      "text": "Inside the 3D Memory Reconstruction, time slows down. A masked cyber assassin known as Phantom steps out of shadow. In Vance's eye reflection, you spot a secret code being transmitted to the AI Megacorp mainframe.",
+      "image_path": "assets/images/neon_cover.webp",
+      "audio_path": "assets/audio/chrono_past_ambient.mp3",
+      "sfx_path": "assets/audio/time_shift.mp3",
+      "effect": "time_rift_blue",
+      "choices": [
+        {
+          "text": "Hack Phantom's neural link using the Neural Decrypter",
+          "target_node_id": "hack_phantom",
+          "condition": { "variable": "inventory", "operator": "contains", "value": "neural_decrypter" },
+          "state_updates": null
+        },
+        {
+          "text": "Trace the transmitted code directly to Megacorp Headquarters",
+          "target_node_id": "trace_code",
+          "condition": null,
+          "state_updates": null
+        }
+      ]
+    },
+    "hack_phantom": {
+      "id": "hack_phantom",
+      "text": "The Neural Decrypter pierces Phantom's digital barrier. You reveal Phantom's identity: Phantom is Vance's own rogue AI clone created to expose Megacorp corruption!",
+      "image_path": "assets/images/chrono_terminal.webp",
+      "audio_path": "assets/audio/chrono_alarm.mp3",
+      "sfx_path": "assets/audio/success_chime.mp3",
+      "effect": "flash_green",
+      "choices": [
+        {
+          "text": "Upload Phantom's corruption data to Tokyo's public network",
+          "target_node_id": "ending_justice",
+          "condition": null,
+          "state_updates": null
+        },
+        {
+          "text": "Join Phantom to take control of Tokyo's cyber grid",
+          "target_node_id": "ending_rogue",
+          "condition": null,
+          "state_updates": null
+        }
+      ]
+    },
+    "trace_code": {
+      "id": "trace_code",
+      "text": "You trace the code to Megacorp, but their automated defense AI detects your intrusion, initiating a high-grade neural purge sequence!",
+      "image_path": "assets/images/neon_cover.webp",
+      "audio_path": "assets/audio/chrono_alarm.mp3",
+      "sfx_path": null,
+      "effect": "flash_red",
+      "choices": [
+        {
+          "text": "Trigger a complete digital blackout system override",
+          "target_node_id": "ending_override",
+          "condition": null,
+          "state_updates": null
+        }
+      ]
+    },
+    "ending_justice": {
+      "id": "ending_justice",
+      "text": "ENDING 1: JUSTICE RESTORED\nThe corruption data spreads across Tokyo's screens. Megacorp's illegal synth-human project is dismantled, establishing you as Shibuya's greatest detective.",
+      "image_path": "assets/images/neon_cover.webp",
+      "audio_path": "assets/audio/victory_theme.mp3",
+      "sfx_path": null,
+      "effect": "flash_gold",
+      "choices": []
+    },
+    "ending_rogue": {
+      "id": "ending_rogue",
+      "text": "ENDING 2: ROGUE PHANTOM\nYou merge your consciousness with Phantom, becoming the unseen digital ruler of Tokyo 2099, watching the neon city from the shadows.",
+      "image_path": "assets/images/chrono_terminal.webp",
+      "audio_path": "assets/audio/mystery_theme.mp3",
+      "sfx_path": null,
+      "effect": "time_rift_blue",
+      "choices": []
+    },
+    "ending_override": {
+      "id": "ending_override",
+      "text": "ENDING 3: SYSTEM OVERRIDE\nThe emergency blackout shuts down Tokyo's cyber grid. The city plummets into dark silence, leaving the case unresolved amidst the neon ruins.",
+      "image_path": "assets/images/chrono_cover.webp",
+      "audio_path": "assets/audio/sad_theme.mp3",
+      "sfx_path": null,
+      "effect": "flash_red",
+      "choices": []
+    }
+  }
+}

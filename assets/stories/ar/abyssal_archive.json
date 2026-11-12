@@ -1,0 +1,101 @@
+{
+  "story_title": "سرداب الأسرار: الأرشيف السحيق",
+  "start_node_id": "intro",
+  "nodes": {
+    "intro": {
+      "id": "intro",
+      "text": "عميقاً تحت مدينة براغ الفيكتورية يقع الأرشيف السحيق. تمتص الجدران الحجرية الرطبة خبو مصباحك النحاسي. تنتشر الأبواب الحديدية المحفورة برموز لاتينية تتطلب التضحية بسر لفتحها.",
+      "image_path": "assets/images/abyssal_cover.webp",
+      "audio_path": "assets/audio/horror_ambient.mp3",
+      "sfx_path": null,
+      "effect": null,
+      "choices": [
+        {
+          "text": "فحص باب السجّيل الأسود الذي يتطلب اعترافاً بالذنب",
+          "target_node_id": "obsidian_door",
+          "condition": null,
+          "state_updates": null
+        },
+        {
+          "text": "البحث في غرفة المذبح المليئة بالعظام عن مفتاح مخفي",
+          "target_node_id": "altar_room",
+          "condition": null,
+          "state_updates": null
+        }
+      ]
+    },
+    "altar_room": {
+      "id": "altar_room",
+      "text": "بين جماجم المذبح، تكتشف قلادة حجر الدم المحفورة بنسر فرسان الأرشيف القدامى.",
+      "image_path": "assets/images/horror_wall.webp",
+      "audio_path": "assets/audio/horror_ambient.mp3",
+      "sfx_path": "assets/audio/item_pickup.mp3",
+      "effect": null,
+      "choices": [
+        {
+          "text": "وضع قلادة حجر الدم على باب السجيل الأسود",
+          "target_node_id": "obsidian_door",
+          "condition": null,
+          "state_updates": [
+            { "variable": "inventory", "operation": "add", "value": "bloodstone_medallion" }
+          ]
+        }
+      ]
+    },
+    "obsidian_door": {
+      "id": "obsidian_door",
+      "text": "ينفتح الباب بصرير مرعب كاشفاً عن مقبرة الظل الأبدي. تتردد همسات في ذهنك تعرض عليك المعرفة المحرمة مقابل تحرير الكائن المحبوس.",
+      "image_path": "assets/images/horror_gate.webp",
+      "audio_path": "assets/audio/horror_ambient.mp3",
+      "sfx_path": "assets/audio/gate_open.mp3",
+      "effect": "flash_red",
+      "choices": [
+        {
+          "text": "التضحية بالقلادة لتدمير الغرفة ودفن الكائن تحت الأرض للأبد",
+          "target_node_id": "ending_bury",
+          "condition": { "variable": "inventory", "operator": "contains", "value": "bloodstone_medallion" },
+          "state_updates": null
+        },
+        {
+          "text": "كسر الأختام وتحرير الكائن القديم",
+          "target_node_id": "ending_unearth",
+          "condition": null,
+          "state_updates": null
+        },
+        {
+          "text": "الهروب عبر أنبوب الصرف السري والعودة للسطح",
+          "target_node_id": "ending_escape",
+          "condition": null,
+          "state_updates": null
+        }
+      ]
+    },
+    "ending_bury": {
+      "id": "ending_bury",
+      "text": "النهاية الأولى: دفن الحقيقة\nتهشم القلادة مسبباً انهياراً صخرياً هائلاً. ينهار الأرشيف السحيق تحت أطنان الأحجار ليبقى رعب العالم القديم مدفوناً للأبد.",
+      "image_path": "assets/images/abyssal_cover.webp",
+      "audio_path": "assets/audio/victory_theme.mp3",
+      "sfx_path": null,
+      "effect": "flash_green",
+      "choices": []
+    },
+    "ending_unearth": {
+      "id": "ending_unearth",
+      "text": "النهاية الثانية: إطلاق الكائن السحيق\nتتحطم الأختام وتغمر الظلال المكان، ويستيقظ الكائن القديم ليمنحك قوى مظلمة مرعبة مقابل استخدام جسدك كمضيف.",
+      "image_path": "assets/images/horror_gate.webp",
+      "audio_path": "assets/audio/mystery_theme.mp3",
+      "sfx_path": null,
+      "effect": "flash_red",
+      "choices": []
+    },
+    "ending_escape": {
+      "id": "ending_escape",
+      "text": "النهاية الثالثة: الهروب من السرداب\nتزحف عبر الممرات المظلمة وتخرج إلى شوارع براغ القمرية. لقد نجوت ببدنك، لكن همسات السرداب ستطارد أحلامك حتى آخر يوم في حياتك.",
+      "image_path": "assets/images/horror_wall.webp",
+      "audio_path": "assets/audio/sad_theme.mp3",
+      "sfx_path": null,
+      "effect": null,
+      "choices": []
+    }
+  }
+}
